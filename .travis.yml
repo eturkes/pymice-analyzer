@@ -1,0 +1,45 @@
+#    This file is part of pymice-analyzer.
+#    Copyright (C) 2018  Emir Turkes
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Emir Turkes can be contacted at eturkes@bu.edu
+
+# Config file for automatic testing at travis-ci.org
+
+language: python
+python:
+  - "3.6_with_system_site_packages"
+sudo: required
+dist: trusty
+notifications:
+  email: false
+sudo: required
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y xvfb python3-pyqt5 python3-pyqt5.qtmultimedia
+install:
+  - python setup.py install
+  - pip install coverage
+  - pip install coveralls
+  - pip install pytest
+  - pip install pytest-cov
+  - pip install pytest-faulthandler
+  - pip install pytest-mock
+  - pip install pytest-qt
+  - pip install pytest-xvfb
+script:
+  - py.test -s -v --cov=./
+after_success:
+  - coveralls
