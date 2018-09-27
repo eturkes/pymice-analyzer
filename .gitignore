@@ -127,3 +127,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Exclude binary and other files that should not be version controlled
+/binary/
