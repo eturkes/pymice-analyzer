@@ -22,7 +22,7 @@
 
 Tools to expand the functionality of [PyMICE](https://github.com/Neuroinflab/PyMICE)
 
-# Example INI file
+## Example INI file
 
 [Total Events]  
 data = ../data/comp+old-behav-flex  
