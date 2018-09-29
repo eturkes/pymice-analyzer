@@ -21,13 +21,13 @@ import pytest
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QFileDialog
 
-from pymice-analyzer import application
+from pymice_analyzer import application
 
 
 @pytest.fixture
 def window(qtbot):
     """Pass the application to the test functions via a pytest fixture."""
-    new_window = application.PyMICE Analyzer()
+    new_window = application.PyMICE()
     qtbot.add_widget(new_window)
     new_window.show()
     return new_window
@@ -35,7 +35,7 @@ def window(qtbot):
 
 def test_window_title(window):
     """Check that the window title shows as declared."""
-    assert window.windowTitle() == 'PyMICE Analyzer'
+    assert window.windowTitle() == 'PyMICE'
 
 
 def test_window_geometry(window):

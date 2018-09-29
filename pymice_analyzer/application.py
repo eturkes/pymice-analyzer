@@ -26,15 +26,15 @@ from PyQt5.QtWidgets import (QAction, QApplication, QDesktopWidget, QDialog, QFi
                              QHBoxLayout, QLabel, QMainWindow, QToolBar, QVBoxLayout, QWidget)
 
 
-class PyMICE Analyzer(QMainWindow):
+class PyMICE(QMainWindow):
     """Create the main window that stores all of the widgets necessary for the application."""
 
     def __init__(self, parent=None):
         """Initialize the components of the main window."""
-        super(PyMICE Analyzer, self).__init__(parent)
+        super(PyMICE, self).__init__(parent)
         self.resize(1024, 768)
-        self.setWindowTitle('PyMICE Analyzer')
-        window_icon = pkg_resources.resource_filename('pymice-analyzer.images',
+        self.setWindowTitle('PyMICE')
+        window_icon = pkg_resources.resource_filename('pymice_analyzer.images',
                                                       'ic_insert_drive_file_black_48dp_1x.png')
         self.setWindowIcon(QIcon(window_icon))
 
@@ -57,7 +57,7 @@ class PyMICE Analyzer(QMainWindow):
         self.file_sub_menu = self.menu_bar.addMenu('File')
 
         self.open_action = QAction('Open File', self)
-        self.open_action.setStatusTip('Open a file into PyMICE Analyzer.')
+        self.open_action.setStatusTip('Open a file into PyMICE.')
         self.open_action.setShortcut('CTRL+O')
         self.open_action.triggered.connect(self.open_file)
 
@@ -86,7 +86,7 @@ class PyMICE Analyzer(QMainWindow):
         self.addToolBar(Qt.TopToolBarArea, self.tool_bar)
         self.tool_bar.setMovable(False)
 
-        open_icon = pkg_resources.resource_filename('pymice-analyzer.images',
+        open_icon = pkg_resources.resource_filename('pymice_analyzer.images',
                                                     'ic_open_in_new_black_48dp_1x.png')
         tool_bar_open_action = QAction(QIcon(open_icon), 'Open File', self)
         tool_bar_open_action.triggered.connect(self.open_file)
@@ -110,7 +110,7 @@ class AboutDialog(QDialog):
         super(AboutDialog, self).__init__(parent)
 
         self.setWindowTitle('About')
-        help_icon = pkg_resources.resource_filename('pymice-analyzer.images',
+        help_icon = pkg_resources.resource_filename('pymice_analyzer.images',
                                                     'ic_help_black_48dp_1x.png')
         self.setWindowIcon(QIcon(help_icon))
         self.resize(300, 200)
@@ -136,7 +136,7 @@ class AboutDialog(QDialog):
 
 def main():
     application = QApplication(sys.argv)
-    window = PyMICE Analyzer()
+    window = PyMICE()
     desktop = QDesktopWidget().availableGeometry()
     width = (desktop.width() - window.width()) / 2
     height = (desktop.height() - window.height()) / 2

@@ -39,12 +39,12 @@ setup(
     author="Emir Turkes",
     author_email='eturkes@bu.edu',
     url='https://github.com/eturkes/pymice-analyzer',
-    packages=['pymice-analyzer', 'pymice-analyzer.images',
-              'pymice-analyzer.tests'],
-    package_data={'pymice-analyzer.images': ['*.png']},
+    packages=['pymice_analyzer', 'pymice_analyzer.images',
+              'pymice_analyzer.tests'],
+    package_data={'pymice_analyzer.images': ['*.png']},
     entry_points={
         'console_scripts': [
-            'PyMICE Analyzer=pymice-analyzer.application:main'
+            'PyMICE=pymice_analyzer.application:main'
         ]
     },
     install_requires=requirements,
