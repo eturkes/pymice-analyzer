@@ -19,8 +19,6 @@
 from setuptools import setup
 
 requirements = [
-    'certifi',
-    'PyMICE'
 ]
 
 test_requirements = [
