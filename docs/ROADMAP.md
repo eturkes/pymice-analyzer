@@ -47,3 +47,6 @@
 
 ### Web
 * Use Wooey to set up a data analysis server
+
+### Git
+* Use branches for different implementations
