@@ -50,3 +50,5 @@
 
 ### Git
 * Use branches for different implementations
+* Push directly to master until 1.0.0 release
+* Consider continuous integration for the future
