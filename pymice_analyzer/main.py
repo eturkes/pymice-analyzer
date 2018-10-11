@@ -19,4 +19,4 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
-from gooey import Gooey, GooeyParser
+import gooey as gy
