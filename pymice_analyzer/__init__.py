@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*
+
 #    This file is part of pymice-analyzer.
 #    Copyright (C) 2018  Emir Turkes
 #
