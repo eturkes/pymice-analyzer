@@ -19,4 +19,6 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
+"""The main CLI and GUI routine."""
+
 import gooey as gy

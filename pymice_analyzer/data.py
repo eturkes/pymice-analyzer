@@ -19,17 +19,20 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
+"""Load and clean data from Intellicage."""
+
 import pymice as pm
 
-def load_data(*args, **kwargs):
-    """This function loads the data and checks its validity."""
 
-    dataFiles = [0 for x in range(len(args))]
+def load_data(*args, **kwargs):
+    """Loads the data and checks its validity."""
+
+    data_files = [0 for x in range(len(args))]
     for i in range(0, len(args)):
-        dataFiles[i] = args[i]
+        data_files[i] = args[i]
 
     # Merge the data.
-    loaders = [pm.Loader(filename) for filename in dataFiles]
+    loaders = [pm.Loader(filename) for filename in data_files]
     data = pm.Merger(*loaders)
 
     print("Done loading data.")
@@ -38,21 +41,20 @@ def load_data(*args, **kwargs):
         print(mouse)
 
     # Read in period of analysis from timeline.ini.
-    timeline = pm.Timeline('../timeline/hab1.ini')
-    start1, end1 = timeline.getTimeBounds(kwargs['phase1'])
-    start2, end2 = timeline.getTimeBounds(kwargs['phase2'])
-    print("%s:\t%s - %s" % (kwargs['phase1'], start1, end1))
-    print("%s:\t%s - %s" % (kwargs['phase2'], start2, end2))
+    timeline = pm.Timeline("../timeline/hab1.ini")
+    start1, end1 = timeline.getTimeBounds(kwargs["phase1"])
+    start2, end2 = timeline.getTimeBounds(kwargs["phase2"])
+    print("%s:\t%s - %s" % (kwargs["phase1"], start1, end1))
+    print("%s:\t%s - %s" % (kwargs["phase2"], start2, end2))
 
-    # Check for any problems (indicated in the log) during the period of
-    # interest.
-    dataValidator = pm.DataValidator(pm.PresenceLogAnalyzer())
-    validatorReport = dataValidator(data)
+    # Check for any problems (indicated in the log) during the period of interest.
+    data_validator = pm.DataValidator(pm.PresenceLogAnalyzer())
+    validator_report = data_validator(data)
 
-    noPresenceProblems = pm.FailureInspector('Presence')
+    no_presence_problems = pm.FailureInspector("Presence")
 
-    if noPresenceProblems(validatorReport, (start1, end1)):
-        if noPresenceProblems(validatorReport, (start2, end2)):
+    if no_presence_problems(validator_report, (start1, end1)):
+        if no_presence_problems(validator_report, (start2, end2)):
             print("Presences OK.")
 
     return data, start1, end1, start2, end2
