@@ -62,3 +62,8 @@ def parse_args():
         # Using vars(args) returns the data as a dictionary
         jn.dump(vars(args), data_file)
     return args
+
+
+if __name__ == "__main__":
+    CONF = parse_args()
+    print("Done")
