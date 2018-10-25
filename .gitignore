@@ -128,5 +128,8 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# Pyre type checker
+.pyre/
+
 # Exclude binary and other files that should not be version controlled
 /binary/
