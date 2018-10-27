@@ -30,7 +30,7 @@ import gooey as gy
 @gy.Gooey(program_name="PyMICE Analyzer")
 def parse_args():
     """Use GooeyParser to build up arguments in the script and save the arguments in a
-    default json file so that they can be retrived each time the script is ran.
+    default json file so that they can be retrieved each time the script is ran.
     """
 
     stored_args = {}

@@ -24,7 +24,7 @@
 # the packages. pip is also upgraded manually because conda keeps it at an unusually
 # old version.
 
-# Call the script using ". ./upgrade-env". Note the first dot, this neccessary to make 
+# Call the script using ". ./upgrade-env". Note the first dot, this necessary to make
 # conda available by executing the script in the current shell.
 
 echo Upgrade\ conda\ environment: \
