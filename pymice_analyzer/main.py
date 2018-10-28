@@ -59,7 +59,7 @@ def parse_args():
     parser.add_argument(
         "project_name",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("project_name"),
         help="Name of your project",
     )
     parser.add_argument(
@@ -71,73 +71,73 @@ def parse_args():
     parser.add_argument(
         "start",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("start"),
         help="Start times and dates of the phases",
     )
     parser.add_argument(
         "end",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("end"),
         help="End times and dates of the phases",
     )
     parser.add_argument(
         "excluded_groups",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("excluded_groups"),
         help="Groups to exclude",
     )
     parser.add_argument(
         "excluded_animals",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("excluded_animals"),
         help="Animals to exclude",
     )
     parser.add_argument(
         "comparisons",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("comparisons"),
         help="What comparisons to make",
     )
     parser.add_argument(
         "error",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("error"),
         help="Way error should be measured",
     )
     parser.add_argument(
         "normality",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("normality"),
         help="Which normality tests to use",
     )
     parser.add_argument(
         "variance",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("variance"),
         help="Which variance tests to use",
     )
     parser.add_argument(
         "tests",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("tests"),
         help="Which statistical tests to use",
     )
     parser.add_argument(
         "post_hoc",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("post_hoc"),
         help="Which post hoc tests to use",
     )
     parser.add_argument(
         "plots",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("plots"),
         help="Types of plots to make",
     )
     parser.add_argument(
         "tables",
         action="store",
-        default=stored_args.get("paradigms"),
+        default=stored_args.get("tables"),
         help="Types of tables to make",
     )
     args = parser.parse_args()
