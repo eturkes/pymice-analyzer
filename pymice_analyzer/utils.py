@@ -21,12 +21,12 @@
 
 """Miscellaneous methods to help with the main routine."""
 
+
 import nbformat as nbf
 
 
 def create_notebook():
     """Produces a Jupyter Notebook .ipynb file."""
-
     nb = nbf.v4.new_notebook()
 
     cell_0 = """\

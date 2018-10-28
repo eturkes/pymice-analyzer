@@ -21,6 +21,7 @@
 
 """The main CLI and GUI routine."""
 
+
 import os
 import json as jn
 
@@ -32,7 +33,6 @@ def parse_args():
     """Use GooeyParser to build up arguments in the script and save the arguments in a
     default json file so that they can be retrieved each time the script is ran.
     """
-
     stored_args = {}
     # Get the script name without the extension & use it to build up the json filename.
     script_name = os.path.splitext(os.path.basename(__file__))[0]
@@ -41,6 +41,7 @@ def parse_args():
     if os.path.isfile(args_file):
         with open(args_file) as data_file:
             stored_args = jn.load(data_file)
+
     parser = gy.GooeyParser(description="PyMICE Analyzer")
     parser.add_argument(
         "data_directory",
@@ -141,10 +142,12 @@ def parse_args():
         help="Types of tables to make",
     )
     args = parser.parse_args()
+
     # Store the values of the arguments so that it is available on next run.
     with open(args_file, "w") as data_file:
-        # Using vars(args) returns the data as a dictionary
+        # Using vars(args) returns the data as a dictionary.
         jn.dump(vars(args), data_file)
+
     return args
 
 

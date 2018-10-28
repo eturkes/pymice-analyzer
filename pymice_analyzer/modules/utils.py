@@ -21,12 +21,12 @@
 
 """Load and clean data from Intellicage."""
 
+
 import pymice as pm
 
 
 def load_data(*args, **kwargs):
     """Loads the data and checks its validity."""
-
     data_files = [0 for x in range(len(args))]
     for i in range(0, len(args)):
         data_files[i] = args[i]
@@ -34,9 +34,7 @@ def load_data(*args, **kwargs):
     # Merge the data.
     loaders = [pm.Loader(filename) for filename in data_files]
     data = pm.Merger(*loaders)
-
     print("Done loading data.")
-
     for mouse in sorted(data.getGroup()):
         print(mouse)
 
@@ -50,9 +48,7 @@ def load_data(*args, **kwargs):
     # Check for any problems (indicated in the log) during the period of interest.
     data_validator = pm.DataValidator(pm.PresenceLogAnalyzer())
     validator_report = data_validator(data)
-
     no_presence_problems = pm.FailureInspector("Presence")
-
     if no_presence_problems(validator_report, (start1, end1)):
         if no_presence_problems(validator_report, (start2, end2)):
             print("Presences OK.")
