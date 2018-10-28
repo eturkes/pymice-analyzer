@@ -35,8 +35,7 @@ def parse_args():
     """
     stored_args = {}
     # Get the script name without the extension & use it to build up the json filename.
-    script_name = os.path.splitext(os.path.basename(__file__))[0]
-    args_file = "{}-args.jn".format(script_name)
+    args_file = "pymice-analyzer-args.json"
     # Read in the prior arguments as a dictionary.
     if os.path.isfile(args_file):
         with open(args_file) as data_file:
