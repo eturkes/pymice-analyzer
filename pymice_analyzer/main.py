@@ -27,6 +27,8 @@ import json as jn
 
 import gooey as gy
 
+import utils as us
+
 
 @gy.Gooey(program_name="PyMICE Analyzer")
 def parse_args():
@@ -152,4 +154,7 @@ def parse_args():
 
 if __name__ == "__main__":
     conf = parse_args()
+    us.create_project_layout(
+        conf.data_directory, conf.output_directory, conf.project_name
+    )
     print("Done")

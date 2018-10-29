@@ -22,7 +22,25 @@
 """Miscellaneous methods to help with the main routine."""
 
 
+import os
+import shutil as sl
+
 import nbformat as nbf
+
+
+def create_project_layout(data_directory, output_directory, project_name):
+    """Creates layout of project directories"""
+    os.makedirs(os.path.join(output_directory, project_name, "pipeline"))
+    os.mkdir(os.path.join(output_directory, project_name, "data"))
+    os.mkdir(os.path.join(output_directory, project_name, "output"))
+    os.symlink(
+        data_directory,
+        os.path.join(output_directory, project_name, "data", "intellicage"),
+    )
+    sl.copytree(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "modules"),
+        os.path.join(output_directory, project_name, "pipeline", "modules"),
+    )
 
 
 def create_notebook():
