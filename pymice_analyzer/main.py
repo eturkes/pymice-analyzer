@@ -36,7 +36,6 @@ def parse_args():
     default json file so that they can be retrieved each time the script is ran.
     """
     stored_args = {}
-    # Get the script name without the extension & use it to build up the json filename.
     args_file = "pymice-analyzer-args.json"
     # Read in the prior arguments as a dictionary.
     if os.path.isfile(args_file):
@@ -142,8 +141,8 @@ def parse_args():
         default=stored_args.get("tables"),
         help="Types of tables to make",
     )
-    args = parser.parse_args()
 
+    args = parser.parse_args()
     # Store the values of the arguments so that it is available on next run.
     with open(args_file, "w") as data_file:
         # Using vars(args) returns the data as a dictionary.
