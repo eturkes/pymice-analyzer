@@ -31,6 +31,7 @@ import nbformat as nbf
 def create_project_layout(data_directory, output_directory, project_name):
     """Creates layout of project directories"""
     os.makedirs(os.path.join(output_directory, project_name, "pipeline"))
+    os.mkdir(os.path.join(output_directory, project_name, "pipeline", "timeline"))
     os.mkdir(os.path.join(output_directory, project_name, "data"))
     os.mkdir(os.path.join(output_directory, project_name, "output"))
     os.symlink(
@@ -40,6 +41,20 @@ def create_project_layout(data_directory, output_directory, project_name):
     sl.copytree(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), "modules"),
         os.path.join(output_directory, project_name, "pipeline", "modules"),
+    )
+    sl.copy2(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
+        ),
+        os.path.join(output_directory, project_name, "inspect-pipeline.sh"),
+    )
+    sl.copy2(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "misc", "1-min-bin.sh"
+        ),
+        os.path.join(
+            output_directory, project_name, "pipeline", "timeline", "1-min-bin.sh"
+        ),
     )
 
 
