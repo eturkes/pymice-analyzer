@@ -58,12 +58,29 @@ def create_project_layout(data_directory, output_directory, project_name):
     )
 
 
-def create_notebook():
+def create_notebook(
+    data_directory,
+    output_directory,
+    project_name,
+    paradigms,
+    start,
+    end,
+    excluded_groups,
+    excluded_animals,
+    comparisons,
+    error,
+    normality,
+    variance,
+    tests,
+    post_hoc,
+    plots,
+    tables,
+):
     """Produces a Jupyter Notebook .ipynb file."""
     nb = nbf.v4.new_notebook()
 
-    cell_0 = """\
-    # Number of Visits - Project Name"""
+    cell_0 = f"""\
+    # {paradigms} - {project_name}"""
 
     cell_1 = """\
     # Load modules necessary for the notebook to run.
@@ -73,36 +90,36 @@ def create_notebook():
     cell_2 = """\
     ## Run Paradigm"""
 
-    cell_3 = """\
+    cell_3 = f"""\
     # Tweakable constants.
-    START = ["2017-03-20 11:02:07", "2017-03-21 11:02:07"]
-    END = ["2017-03-20 12:02:07", "2017-03-22 09:02:07"]
-    EXCLUDED_GROUPS = ["Cage9 Pump"]
-    EXCLUDED_ANIMALS = ["19 WT", "13 KO"]
+    START = {start}
+    END = {end}
+    EXCLUDED_GROUPS = {excluded_groups}
+    EXCLUDED_ANIMALS = {excluded_animals}
     
     # Main routine."""
 
     cell_4 = """\
     ## Statistical Testing"""
 
-    cell_5 = """\
+    cell_5 = f"""\
     # Tweakable constants.
-    COMPARISONS = ["between_group", "within_group"]
-    ERROR = ["sem"]
-    NORMALITY = ["shapiro"]
-    VARIANCE = ["levene"]
-    METHOD = ["kruskal_wallis"]
-    POST_HOC = ["dunns"]
+    COMPARISONS = {comparisons}
+    ERROR = {error}
+    NORMALITY = {normality}
+    VARIANCE = {variance}
+    TESTS = {tests}
+    POST_HOC = {post_hoc}
     
     # Main routine."""
 
     cell_6 = """\
     ## Generate Figures"""
 
-    cell_7 = """\
+    cell_7 = f"""\
     # Tweakable constants.
-    PLOTS = ["bar"]
-    TABLES = ["normality", "variance", "post_hoc"]
+    PLOTS = {plots}
+    TABLES = {tables}
     
     # Main routine."""
 
@@ -117,4 +134,4 @@ def create_notebook():
         nbf.v4.new_code_cell(cell_7),
     ]
 
-    nbf.write(nb, "number_of_visits.ipynb")
+    nbf.write(nb, f"{project_name}.ipynb")

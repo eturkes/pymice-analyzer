@@ -157,4 +157,22 @@ if __name__ == "__main__":
     us.create_project_layout(
         conf.data_directory, conf.output_directory, conf.project_name
     )
+    us.create_notebook(
+        conf.data_directory,
+        conf.output_directory,
+        conf.project_name,
+        conf.paradigms,
+        conf.start,
+        conf.end,
+        conf.excluded_groups,
+        conf.excluded_animals,
+        conf.comparisons,
+        conf.error,
+        conf.normality,
+        conf.variance,
+        conf.tests,
+        conf.post_hoc,
+        conf.plots,
+        conf.tables,
+    )
     print("Done")
