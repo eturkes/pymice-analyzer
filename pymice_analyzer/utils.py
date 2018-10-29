@@ -92,10 +92,10 @@ def create_notebook(
 
     cell_3 = f"""\
     # Tweakable constants.
-    START = {start}
-    END = {end}
-    EXCLUDED_GROUPS = {excluded_groups}
-    EXCLUDED_ANIMALS = {excluded_animals}
+    START = ("{start}")
+    END = ("{end}")
+    EXCLUDED_GROUPS = ("{excluded_groups}")
+    EXCLUDED_ANIMALS = ("{excluded_animals}")
     
     # Main routine."""
 
@@ -104,12 +104,12 @@ def create_notebook(
 
     cell_5 = f"""\
     # Tweakable constants.
-    COMPARISONS = {comparisons}
-    ERROR = {error}
-    NORMALITY = {normality}
-    VARIANCE = {variance}
-    TESTS = {tests}
-    POST_HOC = {post_hoc}
+    COMPARISONS = ("{comparisons}")
+    ERROR = ("{error}")
+    NORMALITY = ("{normality}")
+    VARIANCE = ("{variance}")
+    TESTS = ("{tests}")
+    POST_HOC = ("{post_hoc}")
     
     # Main routine."""
 
@@ -118,8 +118,8 @@ def create_notebook(
 
     cell_7 = f"""\
     # Tweakable constants.
-    PLOTS = {plots}
-    TABLES = {tables}
+    PLOTS = ("{plots}")
+    TABLES = ("{tables}")
     
     # Main routine."""
 
