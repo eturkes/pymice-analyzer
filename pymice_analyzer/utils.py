@@ -91,11 +91,11 @@ def create_notebook(
     ## Run Paradigm"""
 
     cell_3 = f"""\
-    # Tweakable constants.
-    START = ("{start}")
-    END = ("{end}")
-    EXCLUDED_GROUPS = ("{excluded_groups}")
-    EXCLUDED_ANIMALS = ("{excluded_animals}")
+    # Input arguments.
+    start = ("{start}")
+    end = ("{end}")
+    excluded_groups = ("{excluded_groups}")
+    excluded_animals = ("{excluded_animals}")
     
     # Main routine."""
 
@@ -103,13 +103,13 @@ def create_notebook(
     ## Statistical Testing"""
 
     cell_5 = f"""\
-    # Tweakable constants.
-    COMPARISONS = ("{comparisons}")
-    ERROR = ("{error}")
-    NORMALITY = ("{normality}")
-    VARIANCE = ("{variance}")
-    TESTS = ("{tests}")
-    POST_HOC = ("{post_hoc}")
+    # Input arguments.
+    comparisons = ("{comparisons}")
+    error = ("{error}")
+    normality = ("{normality}")
+    variance = ("{variance}")
+    tests = ("{tests}")
+    post_hoc = ("{post_hoc}")
     
     # Main routine."""
 
@@ -117,9 +117,9 @@ def create_notebook(
     ## Generate Figures"""
 
     cell_7 = f"""\
-    # Tweakable constants.
-    PLOTS = ("{plots}")
-    TABLES = ("{tables}")
+    # Input arguments.
+    plots = ("{plots}")
+    tables = ("{tables}")
     
     # Main routine."""
 
