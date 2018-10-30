@@ -66,6 +66,21 @@ def parse_args():
     parser.add_argument(
         "paradigms",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=[
+            "Number of Visits",
+            "Number of Nosepokes",
+            "Visit Duration",
+            "Nosepoke Duration",
+            "Time to All Corners",
+            "Time to All Nosepokes",
+            "Corner Preference",
+            "Door Preference",
+            "Zig-zags",
+            "Perimeter Visits",
+            "Overtake Occurrences",
+        ],
         default=stored_args.get("paradigms"),
         help="Paradigms to use in the analysis",
     )
@@ -96,48 +111,72 @@ def parse_args():
     parser.add_argument(
         "comparisons",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Between Group", "Within Group"],
         default=stored_args.get("comparisons"),
         help="What comparisons to make",
     )
     parser.add_argument(
         "error",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["SEM", "SD"],
         default=stored_args.get("error"),
         help="Way error should be measured",
     )
     parser.add_argument(
         "normality",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
         default=stored_args.get("normality"),
         help="Which normality tests to use",
     )
     parser.add_argument(
         "variance",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Levene", "Brown-Forsythe"],
         default=stored_args.get("variance"),
         help="Which variance tests to use",
     )
     parser.add_argument(
         "tests",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Kruskal-Wallis", "Mann-Whitney"],
         default=stored_args.get("tests"),
         help="Which statistical tests to use",
     )
     parser.add_argument(
         "post_hoc",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Dunn", "Tukey"],
         default=stored_args.get("post_hoc"),
         help="Which post hoc tests to use",
     )
     parser.add_argument(
         "plots",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Bar", "Line"],
         default=stored_args.get("plots"),
         help="Types of plots to make",
     )
     parser.add_argument(
         "tables",
         action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Normality", "Variance", "Post-hoc"],
         default=stored_args.get("tables"),
         help="Types of tables to make",
     )
