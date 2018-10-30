@@ -38,8 +38,8 @@ def parse_args():
     parser = gy.GooeyParser(
         description="Tools to aid Intellicage analysis using PyMICE"
     )
-
     subs = parser.add_subparsers()
+
     num_vists_parser = subs.add_parser("Number of Visits")
     num_nosepokes_parser = subs.add_parser("Number of Nosepokes")
     visit_dur_parser = subs.add_parser("Visit Duration")
@@ -51,6 +51,34 @@ def parse_args():
     zig_zag_parser = subs.add_parser("Zig-zags")
     perimeter_parser = subs.add_parser("Perimeter Visits")
     overtake_occurrences = subs.add_parser("Overtake Occurrences")
+
+    paradigm_list = [
+        num_vists_parser,
+        num_nosepokes_parser,
+        visit_dur_parser,
+        nosepoke_dur_parser,
+        time_to_corners_parser,
+        time_to_nosepokes_parser,
+        corner_preference_parser,
+        door_preference_parser,
+        zig_zag_parser,
+        perimeter_parser,
+        overtake_occurrences,
+    ]
+
+    for paradigm in paradigm_list:
+        paradigm.add_argument(
+            "Data Directory",
+            action="store",
+            widget="DirChooser",
+            help="Input directory containing Intellicage files",
+        )
+        paradigm.add_argument(
+            "Output Directory",
+            action="store",
+            widget="DirChooser",
+            help="Output directory to save analysis",
+        )
 
     return parser.parse_args()
 
