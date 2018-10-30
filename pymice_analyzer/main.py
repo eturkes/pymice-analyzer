@@ -40,30 +40,30 @@ def parse_args():
     )
     subs = parser.add_subparsers()
 
-    num_vists_parser = subs.add_parser("Number of Visits")
-    num_nosepokes_parser = subs.add_parser("Number of Nosepokes")
+    num_visits_parser = subs.add_parser("Number of Visits")
+    num_pokes_parser = subs.add_parser("Number of Nosepokes")
     visit_dur_parser = subs.add_parser("Visit Duration")
-    nosepoke_dur_parser = subs.add_parser("Nosepoke Duration")
-    time_to_corners_parser = subs.add_parser("Time to All Corners")
-    time_to_nosepokes_parser = subs.add_parser("Time to All Nosepokes")
-    corner_preference_parser = subs.add_parser("Corner Preference")
-    door_preference_parser = subs.add_parser("Door Preference")
-    zig_zag_parser = subs.add_parser("Zig-zags")
+    poke_dur_parser = subs.add_parser("Nosepoke Duration")
+    time_corners_parser = subs.add_parser("Time to All Corners")
+    time_pokes_parser = subs.add_parser("Time to All Nosepokes")
+    corner_pref_parser = subs.add_parser("Corner Preference")
+    door_pref_parser = subs.add_parser("Door Preference")
+    zig_zag_parser = subs.add_parser("Zig-zag Visits")
     perimeter_parser = subs.add_parser("Perimeter Visits")
-    overtake_occurrences = subs.add_parser("Overtake Occurrences")
+    overtake_parser = subs.add_parser("Overtake Occurrences")
 
     paradigm_list = [
-        num_vists_parser,
-        num_nosepokes_parser,
+        num_visits_parser,
+        num_pokes_parser,
         visit_dur_parser,
-        nosepoke_dur_parser,
-        time_to_corners_parser,
-        time_to_nosepokes_parser,
-        corner_preference_parser,
-        door_preference_parser,
+        poke_dur_parser,
+        time_corners_parser,
+        time_pokes_parser,
+        corner_pref_parser,
+        door_pref_parser,
         zig_zag_parser,
         perimeter_parser,
-        overtake_occurrences,
+        overtake_parser,
     ]
 
     for paradigm in paradigm_list:
