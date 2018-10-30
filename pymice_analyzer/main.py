@@ -44,27 +44,27 @@ def parse_args():
 
     parser = gy.GooeyParser(description="PyMICE Analyzer")
     parser.add_argument(
-        "data_directory",
+        "Data Directory",
         action="store",
         default=stored_args.get("data_directory"),
         widget="DirChooser",
         help="Input directory containing Intellicage files",
     )
     parser.add_argument(
-        "output_directory",
+        "Output Directory",
         action="store",
         widget="DirChooser",
         default=stored_args.get("output_directory"),
         help="Output directory to save analysis",
     )
     parser.add_argument(
-        "project_name",
+        "Project Name",
         action="store",
         default=stored_args.get("project_name"),
         help="Name of your project",
     )
     parser.add_argument(
-        "paradigms",
+        "Paradigms",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -85,31 +85,31 @@ def parse_args():
         help="Paradigms to use in the analysis",
     )
     parser.add_argument(
-        "start",
+        "Start",
         action="store",
         default=stored_args.get("start"),
         help="Start times and dates of the phases",
     )
     parser.add_argument(
-        "end",
+        "End",
         action="store",
         default=stored_args.get("end"),
         help="End times and dates of the phases",
     )
     parser.add_argument(
-        "excluded_groups",
+        "Excluded Groups",
         action="store",
         default=stored_args.get("excluded_groups"),
         help="Groups to exclude",
     )
     parser.add_argument(
-        "excluded_animals",
+        "Excluded Animals",
         action="store",
         default=stored_args.get("excluded_animals"),
         help="Animals to exclude",
     )
     parser.add_argument(
-        "comparisons",
+        "Comparisons",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -118,7 +118,7 @@ def parse_args():
         help="What comparisons to make",
     )
     parser.add_argument(
-        "error",
+        "Error",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -127,7 +127,7 @@ def parse_args():
         help="Way error should be measured",
     )
     parser.add_argument(
-        "normality",
+        "Normality",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -136,7 +136,7 @@ def parse_args():
         help="Which normality tests to use",
     )
     parser.add_argument(
-        "variance",
+        "Variance",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -145,7 +145,7 @@ def parse_args():
         help="Which variance tests to use",
     )
     parser.add_argument(
-        "tests",
+        "Tests",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -154,7 +154,7 @@ def parse_args():
         help="Which statistical tests to use",
     )
     parser.add_argument(
-        "post_hoc",
+        "Post-hoc",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -163,7 +163,7 @@ def parse_args():
         help="Which post hoc tests to use",
     )
     parser.add_argument(
-        "plots",
+        "Plots",
         action="store",
         widget="Listbox",
         nargs="*",
@@ -172,7 +172,7 @@ def parse_args():
         help="Types of plots to make",
     )
     parser.add_argument(
-        "tables",
+        "Tables",
         action="store",
         widget="Listbox",
         nargs="*",
