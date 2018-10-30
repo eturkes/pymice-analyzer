@@ -22,25 +22,8 @@
 
 Tools to expand the functionality of [PyMICE](https://github.com/Neuroinflab/PyMICE)
 
-## Example INI file
+## Screenshots
 
-[Total Events]  
-data = ../data/comp+old-behav-flex  
-start = 2017-03-20 11:02:07, 2017-03-21 11:02:07  
-end = 2017-03-20 12:02:07, 2017-03-22 09:02:07  
-excluded-groups = Cage9 Pump  
-excluded-animals = 19 WT, 13 KO  
-cages = 2  
+![pymice-analyzer-1](https://user-images.githubusercontent.com/25193231/47751184-7d7ebc00-dc67-11e8-87a8-10644b765930.png)
 
-events = visits, nosepokes  
-error = SEM  
-comparisons = between-group, within-group  
-normality = shapiro  
-variance = levene  
-stats = kruskal-wallis  
-post-hoc = dunns  
-
-bar-graph = post-hoc  
-graph-settings = combined-plots  
-table = normality, variance, post-hoc  
-table-settings = combined-plots  
+![pymice-analyzer-2](https://user-images.githubusercontent.com/25193231/47751225-94251300-dc67-11e8-87b9-f22d4c07f776.png)
