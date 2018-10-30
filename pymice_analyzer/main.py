@@ -30,168 +30,29 @@ import gooey as gy
 import utils as us
 
 
-@gy.Gooey(program_name="PyMICE Analyzer")
+@gy.Gooey(program_name="PyMICE Analyzer", show_sidebar=True, sidebar_title="Paradigms")
 def parse_args():
     """Use GooeyParser to build up arguments in the script and save the arguments in a
     default json file so that they can be retrieved each time the script is ran.
     """
-    stored_args = {}
-    args_file = "pymice-analyzer-args.json"
-    # Read in the prior arguments as a dictionary.
-    if os.path.isfile(args_file):
-        with open(args_file) as data_file:
-            stored_args = jn.load(data_file)
-
     parser = gy.GooeyParser(
         description="Tools to aid Intellicage analysis using PyMICE"
     )
-    parser.add_argument(
-        "Data Directory",
-        action="store",
-        default=stored_args.get("data_directory"),
-        widget="DirChooser",
-        help="Input directory containing Intellicage files",
-    )
-    parser.add_argument(
-        "Output Directory",
-        action="store",
-        widget="DirChooser",
-        default=stored_args.get("output_directory"),
-        help="Output directory to save analysis",
-    )
-    parser.add_argument(
-        "Project Name",
-        action="store",
-        default=stored_args.get("project_name"),
-        help="Name of your project",
-    )
-    parser.add_argument(
-        "Paradigms",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=[
-            "Number of Visits",
-            "Number of Nosepokes",
-            "Visit Duration",
-            "Nosepoke Duration",
-            "Time to All Corners",
-            "Time to All Nosepokes",
-            "Corner Preference",
-            "Door Preference",
-            "Zig-zags",
-            "Perimeter Visits",
-            "Overtake Occurrences",
-        ],
-        default=stored_args.get("paradigms"),
-        help="Paradigms to use in the analysis",
-    )
-    parser.add_argument(
-        "Start",
-        action="store",
-        default=stored_args.get("start"),
-        help="Start times and dates of the phases",
-    )
-    parser.add_argument(
-        "End",
-        action="store",
-        default=stored_args.get("end"),
-        help="End times and dates of the phases",
-    )
-    parser.add_argument(
-        "-eg",
-        "--Excluded Groups",
-        action="store",
-        default=stored_args.get("excluded_groups"),
-        help="Groups to exclude",
-    )
-    parser.add_argument(
-        "-ea",
-        "--Excluded Animals",
-        action="store",
-        default=stored_args.get("excluded_animals"),
-        help="Animals to exclude",
-    )
-    parser.add_argument(
-        "Comparisons",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Between Group", "Within Group"],
-        default=stored_args.get("comparisons"),
-        help="What comparisons to make",
-    )
-    parser.add_argument(
-        "Error",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["SEM", "SD"],
-        default=stored_args.get("error"),
-        help="Way error should be measured",
-    )
-    parser.add_argument(
-        "Normality",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
-        default=stored_args.get("normality"),
-        help="Which normality tests to use",
-    )
-    parser.add_argument(
-        "Variance",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Levene", "Brown-Forsythe"],
-        default=stored_args.get("variance"),
-        help="Which variance tests to use",
-    )
-    parser.add_argument(
-        "Tests",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Kruskal-Wallis", "Mann-Whitney"],
-        default=stored_args.get("tests"),
-        help="Which statistical tests to use",
-    )
-    parser.add_argument(
-        "Post-hoc",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Dunn", "Tukey"],
-        default=stored_args.get("post_hoc"),
-        help="Which post hoc tests to use",
-    )
-    parser.add_argument(
-        "Plots",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Bar", "Line"],
-        default=stored_args.get("plots"),
-        help="Types of plots to make",
-    )
-    parser.add_argument(
-        "Tables",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Normality", "Variance", "Post-hoc"],
-        default=stored_args.get("tables"),
-        help="Types of tables to make",
-    )
 
-    args = parser.parse_args()
-    # Store the values of the arguments so that it is available on next run.
-    with open(args_file, "w") as data_file:
-        # Using vars(args) returns the data as a dictionary.
-        jn.dump(vars(args), data_file)
+    subs = parser.add_subparsers()
+    num_vists_parser = subs.add_parser("Number of Visits")
+    num_nosepokes_parser = subs.add_parser("Number of Nosepokes")
+    visit_dur_parser = subs.add_parser("Visit Duration")
+    nosepoke_dur_parser = subs.add_parser("Nosepoke Duration")
+    time_to_corners_parser = subs.add_parser("Time to All Corners")
+    time_to_nosepokes_parser = subs.add_parser("Time to All Nosepokes")
+    corner_preference_parser = subs.add_parser("Corner Preference")
+    door_preference_parser = subs.add_parser("Door Preference")
+    zig_zag_parser = subs.add_parser("Zig-zags")
+    perimeter_parser = subs.add_parser("Perimeter Visits")
+    overtake_occurrences = subs.add_parser("Overtake Occurrences")
 
-    return args
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
