@@ -97,13 +97,15 @@ def parse_args():
         help="End times and dates of the phases",
     )
     parser.add_argument(
-        "Excluded Groups",
+        "-eg",
+        "--Excluded Groups",
         action="store",
         default=stored_args.get("excluded_groups"),
         help="Groups to exclude",
     )
     parser.add_argument(
-        "Excluded Animals",
+        "-ea",
+        "--Excluded Animals",
         action="store",
         default=stored_args.get("excluded_animals"),
         help="Animals to exclude",
