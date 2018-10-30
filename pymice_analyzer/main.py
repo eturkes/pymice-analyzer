@@ -30,7 +30,12 @@ import gooey as gy
 import utils as us
 
 
-@gy.Gooey(program_name="PyMICE Analyzer", show_sidebar=True, sidebar_title="Paradigms")
+@gy.Gooey(
+    program_name="PyMICE Analyzer",
+    tabbed_groups=True,
+    dump_build_config=True,
+    load_build_config=None,
+)
 def parse_args():
     """Use GooeyParser to build up arguments in the script and save the arguments in a
     default json file so that they can be retrieved each time the script is ran.
@@ -38,47 +43,105 @@ def parse_args():
     parser = gy.GooeyParser(
         description="Tools to aid Intellicage analysis using PyMICE"
     )
-    subs = parser.add_subparsers()
 
-    num_vists_parser = subs.add_parser("Number of Visits")
-    num_nosepokes_parser = subs.add_parser("Number of Nosepokes")
-    visit_dur_parser = subs.add_parser("Visit Duration")
-    nosepoke_dur_parser = subs.add_parser("Nosepoke Duration")
-    time_to_corners_parser = subs.add_parser("Time to All Corners")
-    time_to_nosepokes_parser = subs.add_parser("Time to All Nosepokes")
-    corner_preference_parser = subs.add_parser("Corner Preference")
-    door_preference_parser = subs.add_parser("Door Preference")
-    zig_zag_parser = subs.add_parser("Zig-zags")
-    perimeter_parser = subs.add_parser("Perimeter Visits")
-    overtake_occurrences = subs.add_parser("Overtake Occurrences")
+    universal_group = parser.add_argument_group(
+        "Universal Settings",
+        "Settings to be applied to all paradigms unless overridden",
+    )
+    num_vists_group = parser.add_argument_group("Number of Visits")
+    num_pokes_group = parser.add_argument_group("Number of Nosepokes")
+    visit_dur_group = parser.add_argument_group("Visit Duration")
+    poke_dur_group = parser.add_argument_group("Nosepoke Duration")
+    time_corners_group = parser.add_argument_group("Time to All Corners")
+    time_pokes_group = parser.add_argument_group("Time to All Nosepokes")
+    corner_pref_group = parser.add_argument_group("Corner Preference")
+    door_pref_group = parser.add_argument_group("Door Preference")
+    zig_zag_group = parser.add_argument_group("Zig-zag Visits")
+    perimeter_group = parser.add_argument_group("Perimeter Visits")
+    overtake_group = parser.add_argument_group("Overtake Occurrences")
 
-    paradigm_list = [
-        num_vists_parser,
-        num_nosepokes_parser,
-        visit_dur_parser,
-        nosepoke_dur_parser,
-        time_to_corners_parser,
-        time_to_nosepokes_parser,
-        corner_preference_parser,
-        door_preference_parser,
-        zig_zag_parser,
-        perimeter_parser,
-        overtake_occurrences,
-    ]
+    universal_group.add_argument(
+        "Project Name", action="store", help="Name of your project"
+    )
+    universal_group.add_argument(
+        "Run pipeline after generating scripts?",
+        action="store",
+        widget=("CheckBox"),
+        help="   If unchecked, use 'run-all.py' in project directory.",
+    )
+    universal_group.add_argument(
+        "Data Directory",
+        action="store",
+        widget="DirChooser",
+        help="Input directory containing Intellicage files",
+    )
+    universal_group.add_argument(
+        "Output Directory",
+        action="store",
+        widget="DirChooser",
+        help="Output directory to save analysis",
+    )
+    universal_group.add_argument(
+        "-s",
+        "--Start (optional)",
+        action="store",
+        widget="DateChooser",
+        help="Start times and dates of the phases",
+    )
+    universal_group.add_argument(
+        "-e",
+        "--End (optional)",
+        action="store",
+        widget="DateChooser",
+        help="End times and dates of the phases",
+    )
 
-    for paradigm in paradigm_list:
-        paradigm.add_argument(
-            "Data Directory",
-            action="store",
-            widget="DirChooser",
-            help="Input directory containing Intellicage files",
-        )
-        paradigm.add_argument(
-            "Output Directory",
-            action="store",
-            widget="DirChooser",
-            help="Output directory to save analysis",
-        )
+    # paradigm_list = [
+    #     num_vists_parser,
+    #     num_nosepokes_parser,
+    #     visit_dur_parser,
+    #     nosepoke_dur_parser,
+    #     time_to_corners_parser,
+    #     time_to_nosepokes_parser,
+    #     corner_preference_parser,
+    #     door_preference_parser,
+    #     zig_zag_parser,
+    #     perimeter_parser,
+    #     overtake_occurrences,
+    # ]
+    #
+    # universal_settings_parser.add_argument(
+    #     "Data Directory",
+    #     action="store",
+    #     widget="DirChooser",
+    #     help="Input directory containing Intellicage files",
+    # )
+    # universal_settings_parser.add_argument(
+    #     "Output Directory",
+    #     action="store",
+    #     widget="DirChooser",
+    #     help="Output directory to save analysis",
+    # )
+    # universal_settings_parser.add_argument(
+    #     "Start",
+    #     action="store",
+    #     widget="DateChooser",
+    #     help="Start times and dates of the phases",
+    # )
+    # universal_settings_parser.add_argument(
+    #     "End",
+    #     action="store",
+    #     widget="DateChooser",
+    #     help="End times and dates of the phases",
+    # )
+    #
+    # for paradigm in paradigm_list:
+    #     paradigm.add_argument(
+    #         "-eg", "--Excluded Groups", action="store", help="Groups to exclude"
+    #     )
+    #     paradigm.add_argument(
+    #         "-ea", "--Excluded Animals", action="store", help="Animals to exclude"
+    #     )
 
     return parser.parse_args()
 
