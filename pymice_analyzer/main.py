@@ -36,7 +36,7 @@ def parse_args():
     default json file so that they can be retrieved each time the script is ran.
     """
     parser = gy.GooeyParser(
-        description="Tools to aid Intellicage analysis using PyMICE"
+        description="GPLv3 - Emir Turkes; Phenovance LLC"
     )
     subs = parser.add_subparsers()
 
@@ -87,59 +87,12 @@ def parse_args():
         help="End times and dates of the phases",
     )
     universal_parser.add_argument(
-        "Comparisons",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Between Group", "Within Group"],
-        help="What comparisons to make",
-    )
-    universal_parser.add_argument(
-        "Error",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["SEM", "SD"],
-        help="Way error should be measured",
-    )
-    universal_parser.add_argument(
-        "Normality",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
-        help="Which normality tests to use",
-    )
-    universal_parser.add_argument(
-        "Variance",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Levene", "Brown-Forsythe"],
-        help="Which variance tests to use",
-    )
-    universal_parser.add_argument(
-        "Tests",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Kruskal-Wallis", "Mann-Whitney"],
-        help="Which statistical tests to use",
-    )
-    universal_parser.add_argument(
-        "Post-hoc",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=["Dunn", "Tukey"],
-        help="Which post hoc tests to use",
-    )
-    universal_parser.add_argument(
         "Plots",
         action="store",
         widget="Listbox",
         nargs="*",
-        choices=["Bar", "Line"],
+        choices=["Bar", "Line", "Box"],
+        default=["Bar"],
         help="Types of plots to make",
     )
     universal_parser.add_argument(
@@ -148,7 +101,89 @@ def parse_args():
         widget="Listbox",
         nargs="*",
         choices=["Normality", "Variance", "Post-hoc"],
+        default=["Variance", "Post-hoc"],
         help="Types of tables to make",
+    )
+    universal_parser.add_argument(
+        "Comparisons",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["Between Group", "Within Group"],
+        default="Between Group",
+        help="What comparisons to make",
+    )
+    universal_parser.add_argument(
+        "Error",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["SEM", "SD"],
+        default="SEM",
+        help="Way error should be measured",
+    )
+    universal_parser.add_argument(
+        "Normality",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+        default="Shapiro–Wilk",
+        help="Which normality tests to use",
+    )
+    universal_parser.add_argument(
+        "Variance",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["Levene", "Brown-Forsythe"],
+        default="Levene",
+        help="Which variance tests to use",
+    )
+    universal_parser.add_argument(
+        "Tests",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["Kruskal-Wallis", "Mann-Whitney"],
+        default="Kruskal-Wallis",
+        help="Which statistical tests to use",
+    )
+    universal_parser.add_argument(
+        "Post-hoc",
+        action="store",
+        widget="Dropdown",
+        nargs="*",
+        choices=["Dunn", "Tukey"],
+        default="Dunn",
+        help="Which post hoc tests to use",
+    )
+    which_paradigms = universal_parser.add_mutually_exclusive_group()
+    which_paradigms.add_argument(
+        "--Run all available paradigms", action="store_true", help="Listed on the left"
+    )
+    which_paradigms.add_argument(
+        "--Select paradigms", action="store_true", help="Use box on the right"
+    )
+    universal_parser.add_argument(
+        "--Paradigms",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=[
+            "Number of Visits",
+            "Number of Nosepokes",
+            "Visit Duration",
+            "Nosepoke Duration",
+            "Time to All Corners",
+            "Time to All Nosepokes",
+            "Corner Preference",
+            "Door Preference",
+            "Zig-zags Visits",
+            "Perimeter Visits",
+            "Overtake Occurrences",
+        ],
+        help="Make multiple selections using Ctrl and Shift",
     )
     universal_parser.add_argument(
         "--Excluded Groups", action="store", help="Groups to exclude"
@@ -199,7 +234,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Comparisons",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["Between Group", "Within Group"],
             help="What comparisons to make",
@@ -207,7 +242,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Error",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["SEM", "SD"],
             help="Way error should be measured",
@@ -215,7 +250,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Normality",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
             help="Which normality tests to use",
@@ -223,7 +258,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Variance",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["Levene", "Brown-Forsythe"],
             help="Which variance tests to use",
@@ -231,7 +266,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Tests",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["Kruskal-Wallis", "Mann-Whitney"],
             help="Which statistical tests to use",
@@ -239,7 +274,7 @@ def parse_args():
         paradigm_parser.add_argument(
             "--Post-hoc",
             action="store",
-            widget="Listbox",
+            widget="Dropdown",
             nargs="*",
             choices=["Dunn", "Tukey"],
             help="Which post hoc tests to use",
