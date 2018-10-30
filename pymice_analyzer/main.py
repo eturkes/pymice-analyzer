@@ -42,7 +42,9 @@ def parse_args():
         with open(args_file) as data_file:
             stored_args = jn.load(data_file)
 
-    parser = gy.GooeyParser(description="PyMICE Analyzer")
+    parser = gy.GooeyParser(
+        description="Tools to aid Intellicage analysis using PyMICE"
+    )
     parser.add_argument(
         "Data Directory",
         action="store",
