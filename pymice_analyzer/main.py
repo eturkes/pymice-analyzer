@@ -40,6 +40,7 @@ def parse_args():
     )
     subs = parser.add_subparsers()
 
+    universal_parser = subs.add_parser("Universal Settings")
     num_visits_parser = subs.add_parser("Number of Visits")
     num_pokes_parser = subs.add_parser("Number of Nosepokes")
     visit_dur_parser = subs.add_parser("Visit Duration")
@@ -51,6 +52,110 @@ def parse_args():
     zig_zag_parser = subs.add_parser("Zig-zag Visits")
     perimeter_parser = subs.add_parser("Perimeter Visits")
     overtake_parser = subs.add_parser("Overtake Occurrences")
+
+    universal_parser.add_argument(
+        "Project Name", action="store", help="Name of your project"
+    )
+    universal_parser.add_argument(
+        "Run pipeline after generating scripts?",
+        action="store",
+        widget="CheckBox",
+        help="   If unchecked, use 'run-all.py' in project directory.",
+    )
+    universal_parser.add_argument(
+        "Data Directory",
+        action="store",
+        widget="DirChooser",
+        help="Input directory containing Intellicage files",
+    )
+    universal_parser.add_argument(
+        "Output Directory",
+        action="store",
+        widget="DirChooser",
+        help="Output directory to save analysis",
+    )
+    universal_parser.add_argument(
+        "Start",
+        action="store",
+        widget="DateChooser",
+        help="Start times and dates of the phases",
+    )
+    universal_parser.add_argument(
+        "End",
+        action="store",
+        widget="DateChooser",
+        help="End times and dates of the phases",
+    )
+    universal_parser.add_argument(
+        "Comparisons",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Between Group", "Within Group"],
+        help="What comparisons to make",
+    )
+    universal_parser.add_argument(
+        "Error",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["SEM", "SD"],
+        help="Way error should be measured",
+    )
+    universal_parser.add_argument(
+        "Normality",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+        help="Which normality tests to use",
+    )
+    universal_parser.add_argument(
+        "Variance",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Levene", "Brown-Forsythe"],
+        help="Which variance tests to use",
+    )
+    universal_parser.add_argument(
+        "Tests",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Kruskal-Wallis", "Mann-Whitney"],
+        help="Which statistical tests to use",
+    )
+    universal_parser.add_argument(
+        "Post-hoc",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Dunn", "Tukey"],
+        help="Which post hoc tests to use",
+    )
+    universal_parser.add_argument(
+        "Plots",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Bar", "Line"],
+        help="Types of plots to make",
+    )
+    universal_parser.add_argument(
+        "Tables",
+        action="store",
+        widget="Listbox",
+        nargs="*",
+        choices=["Normality", "Variance", "Post-hoc"],
+        help="Types of tables to make",
+    )
+    universal_parser.add_argument(
+        "--Excluded Groups", action="store", help="Groups to exclude"
+    )
+    universal_parser.add_argument(
+        "--Excluded Animals", action="store", help="Animals to exclude"
+    )
 
     paradigm_list = [
         num_visits_parser,
@@ -66,18 +171,100 @@ def parse_args():
         overtake_parser,
     ]
 
-    for paradigm in paradigm_list:
-        paradigm.add_argument(
-            "Data Directory",
+    for paradigm_parser in paradigm_list:
+        paradigm_parser.add_argument(
+            "--Data Directory",
             action="store",
             widget="DirChooser",
             help="Input directory containing Intellicage files",
         )
-        paradigm.add_argument(
-            "Output Directory",
+        paradigm_parser.add_argument(
+            "--Output Directory",
             action="store",
             widget="DirChooser",
             help="Output directory to save analysis",
+        )
+        paradigm_parser.add_argument(
+            "--Start",
+            action="store",
+            widget="DateChooser",
+            help="Start times and dates of the phases",
+        )
+        paradigm_parser.add_argument(
+            "--End",
+            action="store",
+            widget="DateChooser",
+            help="End times and dates of the phases",
+        )
+        paradigm_parser.add_argument(
+            "--Comparisons",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Between Group", "Within Group"],
+            help="What comparisons to make",
+        )
+        paradigm_parser.add_argument(
+            "--Error",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["SEM", "SD"],
+            help="Way error should be measured",
+        )
+        paradigm_parser.add_argument(
+            "--Normality",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+            help="Which normality tests to use",
+        )
+        paradigm_parser.add_argument(
+            "--Variance",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Levene", "Brown-Forsythe"],
+            help="Which variance tests to use",
+        )
+        paradigm_parser.add_argument(
+            "--Tests",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Kruskal-Wallis", "Mann-Whitney"],
+            help="Which statistical tests to use",
+        )
+        paradigm_parser.add_argument(
+            "--Post-hoc",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Dunn", "Tukey"],
+            help="Which post hoc tests to use",
+        )
+        paradigm_parser.add_argument(
+            "--Plots",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Bar", "Line"],
+            help="Types of plots to make",
+        )
+        paradigm_parser.add_argument(
+            "--Tables",
+            action="store",
+            widget="Listbox",
+            nargs="*",
+            choices=["Normality", "Variance", "Post-hoc"],
+            help="Types of tables to make",
+        )
+        paradigm_parser.add_argument(
+            "--Excluded Groups", action="store", help="Groups to exclude"
+        )
+        paradigm_parser.add_argument(
+            "--Excluded Animals", action="store", help="Animals to exclude"
         )
 
     return parser.parse_args()
