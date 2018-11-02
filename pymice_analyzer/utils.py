@@ -132,4 +132,5 @@ def create_notebook(
         ]
 
         pipeline_dir = os.path.join(proj_path, "pipeline")
-        nbf.write(nb, f"{os.path.join(pipeline_dir, paradigm)}.ipynb")
+        notebook_file_name = all_paradigms[paradigm].lower().replace(" ", "_")
+        nbf.write(nb, f"{os.path.join(pipeline_dir, notebook_file_name)}.ipynb")

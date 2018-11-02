@@ -177,7 +177,7 @@ def parse_args():
         "time_pokes": "Time to All Pokes",
         "corner_pref": "Corner Preferences",
         "door_pref": "Door Preference",
-        "zig_zag": "Zig-zag Visits",
+        "zig_zag": "Zig Zag Visits",
         "perimeter": "Perimeter Visits",
         "overtake": "Overtake Occurrences",
     }
