@@ -28,36 +28,36 @@ import shutil as sl
 import nbformat as nbf
 
 
-def create_project_layout(data_dir, out_dir, proj_name):
+def create_project_layout(data_dir, proj_dir, proj_name):
     """Creates layout of project directories"""
-    os.makedirs(os.path.join(out_dir, proj_name, "pipeline"))
-    os.mkdir(os.path.join(out_dir, proj_name, "pipeline", "timeline"))
-    os.mkdir(os.path.join(out_dir, proj_name, "data"))
-    os.mkdir(os.path.join(out_dir, proj_name, "output"))
-    os.symlink(data_dir, os.path.join(out_dir, proj_name, "data", "intellicage"))
+    os.makedirs(os.path.join(proj_dir, proj_name, "pipeline"))
+    os.mkdir(os.path.join(proj_dir, proj_name, "pipeline", "timeline"))
+    os.mkdir(os.path.join(proj_dir, proj_name, "data"))
+    os.mkdir(os.path.join(proj_dir, proj_name, "output"))
+    os.symlink(data_dir, os.path.join(proj_dir, proj_name, "data", "intellicage"))
     sl.copytree(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), "modules"),
-        os.path.join(out_dir, proj_name, "pipeline", "modules"),
+        os.path.join(proj_dir, proj_name, "pipeline", "modules"),
     )
     sl.copy2(
         os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
         ),
-        os.path.join(out_dir, proj_name, "inspect-pipeline.sh"),
+        os.path.join(proj_dir, proj_name, "inspect-pipeline.sh"),
     )
     sl.copy2(
         os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "misc", "1-min-bin.sh"
         ),
-        os.path.join(out_dir, proj_name, "pipeline", "timeline", "1-min-bin.sh"),
+        os.path.join(proj_dir, proj_name, "pipeline", "timeline", "1-min-bin.sh"),
     )
 
 
 def create_notebook(
+    all_paradigms,
     data_dir,
-    out_dir,
+    proj_dir,
     proj_name,
-    paradigms,
     start,
     end,
     excluded_groups,
@@ -73,61 +73,63 @@ def create_notebook(
 ):
     """Produces a Jupyter Notebook .ipynb file."""
 
-    nb = nbf.v4.new_notebook()
+    for paradigm in all_paradigms:
+        nb = nbf.v4.new_notebook()
 
-    cell_0 = f"""\
-    # {paradigms} - {proj_name}"""
+        cell_0 = f"""\
+        # {all_paradigms[paradigm]} - {proj_name}"""
 
-    cell_1 = """\
-    # Load modules necessary for the notebook to run.
-    import modules.importdir
-    importdir.do("modules", globals())"""
+        cell_1 = """\
+        # Load modules necessary for the notebook to run.
+        import modules.importdir
+        importdir.do("modules", globals())"""
 
-    cell_2 = """\
-    ## Run Paradigm"""
+        cell_2 = """\
+        ## Run Paradigm"""
 
-    cell_3 = f"""\
-    # Input arguments.
-    start = ("{start}")
-    end = ("{end}")
-    excluded_groups = ("{excluded_groups}")
-    excluded_animals = ("{excluded_animals}")
-    
-    # Main routine."""
+        cell_3 = f"""\
+        # Input arguments.
+        start = ("{start}")
+        end = ("{end}")
+        excluded_groups = ("{excluded_groups}")
+        excluded_animals = ("{excluded_animals}")
+        
+        # Main routine."""
 
-    cell_4 = """\
-    ## Statistical Testing"""
+        cell_4 = """\
+        ## Statistical Testing"""
 
-    cell_5 = f"""\
-    # Input arguments.
-    comparisons = ("{comparisons}")
-    error = ("{error}")
-    normality = ("{normality}")
-    variance = ("{variance}")
-    tests = ("{tests}")
-    post_hoc = ("{post_hoc}")
-    
-    # Main routine."""
+        cell_5 = f"""\
+        # Input arguments.
+        comparisons = ("{comparisons}")
+        error = ("{error}")
+        normality = ("{normality}")
+        variance = ("{variance}")
+        tests = ("{tests}")
+        post_hoc = ("{post_hoc}")
+        
+        # Main routine."""
 
-    cell_6 = """\
-    ## Generate Figures"""
+        cell_6 = """\
+        ## Generate Figures"""
 
-    cell_7 = f"""\
-    # Input arguments.
-    plots = ("{plots}")
-    tables = ("{tables}")
-    
-    # Main routine."""
+        cell_7 = f"""\
+        # Input arguments.
+        plots = ("{plots}")
+        tables = ("{tables}")
+        
+        # Main routine."""
 
-    nb["cells"] = [
-        nbf.v4.new_markdown_cell(cell_0),
-        nbf.v4.new_code_cell(cell_1),
-        nbf.v4.new_markdown_cell(cell_2),
-        nbf.v4.new_code_cell(cell_3),
-        nbf.v4.new_markdown_cell(cell_4),
-        nbf.v4.new_code_cell(cell_5),
-        nbf.v4.new_markdown_cell(cell_6),
-        nbf.v4.new_code_cell(cell_7),
-    ]
+        nb["cells"] = [
+            nbf.v4.new_markdown_cell(cell_0),
+            nbf.v4.new_code_cell(cell_1),
+            nbf.v4.new_markdown_cell(cell_2),
+            nbf.v4.new_code_cell(cell_3),
+            nbf.v4.new_markdown_cell(cell_4),
+            nbf.v4.new_code_cell(cell_5),
+            nbf.v4.new_markdown_cell(cell_6),
+            nbf.v4.new_code_cell(cell_7),
+        ]
 
-    nbf.write(nb, f"{proj_name}.ipynb")
+        pipeline_dir = os.path.join(proj_dir, proj_name, "pipeline")
+        nbf.write(nb, f"{os.path.join(pipeline_dir, paradigm)}.ipynb")

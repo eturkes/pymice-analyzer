@@ -71,10 +71,10 @@ def parse_args():
         help="Input directory containing Intellicage files",
     )
     universal_parser.add_argument(
-        "out_dir",
+        "proj_dir",
         metavar="Output Directory",
         widget="DirChooser",
-        default=stored_args.get("out_dir"),
+        default=stored_args.get("proj_dir"),
         help="Output directory to save analysis",
     )
     universal_parser.add_argument(
@@ -191,10 +191,10 @@ def parse_args():
             help="Input directory containing Intellicage files",
         )
         paradigm_parser.add_argument(
-            "out_dir",
+            "proj_dir",
             metavar="Output Directory",
             widget="DirChooser",
-            default=stored_args.get("out_dir"),
+            default=stored_args.get("proj_dir"),
             help="Output directory to save analysis",
         )
         paradigm_parser.add_argument(
@@ -293,10 +293,30 @@ def parse_args():
     with open(args_file, "w") as data_file:
         # Using vars(args) returns the data as a dictionary.
         jn.dump(vars(args), data_file)
-    return args
+    return args, all_paradigms
 
 
 if __name__ == "__main__":
     conf = parse_args()
-    us.create_project_layout(conf.data_dir, conf.out_dir, conf.proj_name)
+    args = conf[0]
+    all_paradigms = conf[1]
+    us.create_project_layout(args.data_dir, args.proj_dir, args.proj_name)
+    us.create_notebook(
+        all_paradigms,
+        args.data_dir,
+        args.proj_dir,
+        args.proj_name,
+        args.start,
+        args.end,
+        args.excluded_groups,
+        args.excluded_animals,
+        args.comparisons,
+        args.error,
+        args.normality,
+        args.variance,
+        args.tests,
+        args.post_hoc,
+        args.plots,
+        args.tables,
+    )
     print("Done")
