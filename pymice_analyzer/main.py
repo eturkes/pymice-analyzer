@@ -146,7 +146,7 @@ def parse_args():
         "normality",
         metavar="Normality",
         widget="Dropdown",
-        choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+        choices=["Shapiro-Wilk", "Kolmogorov-Smirnov"],
         default=stored_args.get("normality"),
         help="Which normality tests to use",
     )
@@ -265,7 +265,7 @@ def parse_args():
             "normality",
             metavar="Normality",
             widget="Dropdown",
-            choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+            choices=["Shapiro-Wilk", "Kolmogorov-Smirnov"],
             default=stored_args.get("normality"),
             help="Which normality tests to use",
         )
