@@ -54,9 +54,9 @@ def create_project_layout(data_dir, out_dir, proj_name):
 
 
 def create_notebook(
-    data_directory,
-    output_directory,
-    project_name,
+    data_dir,
+    out_dir,
+    proj_name,
     paradigms,
     start,
     end,
@@ -72,10 +72,11 @@ def create_notebook(
     tables,
 ):
     """Produces a Jupyter Notebook .ipynb file."""
+
     nb = nbf.v4.new_notebook()
 
     cell_0 = f"""\
-    # {paradigms} - {project_name}"""
+    # {paradigms} - {proj_name}"""
 
     cell_1 = """\
     # Load modules necessary for the notebook to run.
@@ -129,4 +130,4 @@ def create_notebook(
         nbf.v4.new_code_cell(cell_7),
     ]
 
-    nbf.write(nb, f"{project_name}.ipynb")
+    nbf.write(nb, f"{proj_name}.ipynb")
