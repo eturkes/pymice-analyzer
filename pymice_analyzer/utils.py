@@ -28,35 +28,35 @@ import shutil as sl
 import nbformat as nbf
 
 
-def create_project_layout(data_dir, proj_dir, proj_name):
+def create_project_layout(data_dir, proj_path):
     """Creates layout of project directories"""
-    os.makedirs(os.path.join(proj_dir, proj_name, "pipeline"))
-    os.mkdir(os.path.join(proj_dir, proj_name, "pipeline", "timeline"))
-    os.mkdir(os.path.join(proj_dir, proj_name, "data"))
-    os.mkdir(os.path.join(proj_dir, proj_name, "output"))
-    os.symlink(data_dir, os.path.join(proj_dir, proj_name, "data", "intellicage"))
+    os.makedirs(os.path.join(proj_path, "pipeline"))
+    os.mkdir(os.path.join(proj_path, "pipeline", "timeline"))
+    os.mkdir(os.path.join(proj_path, "data"))
+    os.mkdir(os.path.join(proj_path, "output"))
+    os.symlink(data_dir, os.path.join(proj_path, "data", "intellicage"))
     sl.copytree(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), "modules"),
-        os.path.join(proj_dir, proj_name, "pipeline", "modules"),
+        os.path.join(proj_path, "pipeline", "modules"),
     )
     sl.copy2(
         os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
         ),
-        os.path.join(proj_dir, proj_name, "inspect-pipeline.sh"),
+        os.path.join(proj_path, "inspect-pipeline.sh"),
     )
     sl.copy2(
         os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "misc", "1-min-bin.sh"
         ),
-        os.path.join(proj_dir, proj_name, "pipeline", "timeline", "1-min-bin.sh"),
+        os.path.join(proj_path, "pipeline", "timeline", "1-min-bin.sh"),
     )
 
 
 def create_notebook(
     all_paradigms,
     data_dir,
-    proj_dir,
+    proj_path,
     proj_name,
     start,
     end,
@@ -131,5 +131,5 @@ def create_notebook(
             nbf.v4.new_code_cell(cell_7),
         ]
 
-        pipeline_dir = os.path.join(proj_dir, proj_name, "pipeline")
+        pipeline_dir = os.path.join(proj_path, "pipeline")
         nbf.write(nb, f"{os.path.join(pipeline_dir, paradigm)}.ipynb")

@@ -300,11 +300,12 @@ if __name__ == "__main__":
     conf = parse_args()
     args = conf[0]
     all_paradigms = conf[1]
-    us.create_project_layout(args.data_dir, args.proj_dir, args.proj_name)
+    proj_path = os.path.join(args.proj_dir, args.proj_name.lower().replace(" ", "_"))
+    us.create_project_layout(args.data_dir, proj_path)
     us.create_notebook(
         all_paradigms,
         args.data_dir,
-        args.proj_dir,
+        proj_path,
         args.proj_name,
         args.start,
         args.end,
