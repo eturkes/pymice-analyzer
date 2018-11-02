@@ -42,174 +42,149 @@ def parse_args():
         with open(args_file) as data_file:
             stored_args = jn.load(data_file)
     parser = gy.GooeyParser(description="GPLv3 - Emir Turkes; Phenovance LLC")
-    parser.add_argument(
-        "--verbose",
-        help="be verbose",
-        dest="verbose",
-        action="store_true",
-        default=False,
-    )
-    subs = parser.add_subparsers(help="commands", dest="command")
+    # parser.add_argument(
+    #     "--verbose",
+    #     help="be verbose",
+    #     dest="verbose",
+    #     action="store_true",
+    #     default=False,
+    # )
+    subs = parser.add_subparsers()
 
     universal_parser = subs.add_parser(
         "universal_settings",
         prog="Universal Settings",
         help="Blanket settings for all paradigms",
     )
-    num_visits_parser = subs.add_parser("Number of Visits")
-    num_pokes_parser = subs.add_parser("Number of Nosepokes")
-    visit_dur_parser = subs.add_parser("Visit Duration")
-    poke_dur_parser = subs.add_parser("Nosepoke Duration")
-    time_corners_parser = subs.add_parser("Time to All Corners")
-    time_pokes_parser = subs.add_parser("Time to All Nosepokes")
-    corner_pref_parser = subs.add_parser("Corner Preference")
-    door_pref_parser = subs.add_parser("Door Preference")
-    zig_zag_parser = subs.add_parser("Zig-zag Visits")
-    perimeter_parser = subs.add_parser("Perimeter Visits")
-    overtake_parser = subs.add_parser("Overtake Occurrences")
+    num_visits_parser = subs.add_parser("num_visits", prog="Number of Visits")
+    num_pokes_parser = subs.add_parser("num_pokes", prog="Number of Nosepokes")
+    visit_dur_parser = subs.add_parser("visit_dur", prog="Visit Duration")
+    poke_dur_parser = subs.add_parser("poke_dur", prog="Nosepoke Duration")
+    time_corners_parser = subs.add_parser("time_corners", prog="Time to All Corners")
+    time_pokes_parser = subs.add_parser("time_pokes", prog="Time to All Nosepokes")
+    corner_pref_parser = subs.add_parser("corner_pref", prog="Corner Preference")
+    door_pref_parser = subs.add_parser("door_pref", prog="Door Preference")
+    zig_zag_parser = subs.add_parser("zig_zag", prog="Zig-zag Visits")
+    perimeter_parser = subs.add_parser("perimeter", prog="Perimeter Visits")
+    overtake_parser = subs.add_parser("overtake", prog="Overtake Occurrences")
 
     universal_parser.add_argument(
-        "project_name",
+        "proj_name",
         metavar="Project Name",
-        action="store",
+        default=stored_args.get("proj_name"),
         help="Name of your project",
-        default=stored_args.get("project_name"),
     )
     universal_parser.add_argument(
-        "--run_pipeline",
-        metavar="Run pipeline after generating scripts",
-        action="store_true",
-        default=False,
+        "run_all",
+        metavar="Run pipeline after generating scripts?",
+        widget="Dropdown",
+        choices=["Yes", "No"],
+        default=stored_args.get("run_all"),
         help="If unchecked use run-all.py in project directory",
     )
     universal_parser.add_argument(
-        "Data Directory",
-        action="store",
+        "data_dir",
+        metavar="Data Directory",
         widget="DirChooser",
+        default=stored_args.get("data_dir"),
         help="Input directory containing Intellicage files",
     )
     universal_parser.add_argument(
-        "Output Directory",
-        action="store",
+        "out_dir",
+        metavar="Output Directory",
         widget="DirChooser",
+        default=stored_args.get("out_dir"),
         help="Output directory to save analysis",
     )
     universal_parser.add_argument(
-        "Start",
-        action="store",
+        "start",
+        metavar="Start",
         widget="DateChooser",
+        default=stored_args.get("start"),
         help="Start times and dates of the phases",
     )
     universal_parser.add_argument(
-        "End",
-        action="store",
+        "end",
+        metavar="End",
         widget="DateChooser",
+        default=stored_args.get("end"),
         help="End times and dates of the phases",
     )
     universal_parser.add_argument(
-        "--plots",
+        "plots",
         metavar="Plots",
-        required=True,
-        widget="Listbox",
-        nargs="+",
+        widget="Dropdown",
         choices=["Bar", "Line", "Box"],
+        default=stored_args.get("plots"),
         help="Types of plots to make",
     )
     universal_parser.add_argument(
-        "Tables",
-        action="store",
-        widget="Listbox",
-        nargs="*",
+        "tables",
+        metavar="Tables",
+        widget="Dropdown",
         choices=["Normality", "Variance", "Post-hoc"],
-        default=["Variance", "Post-hoc"],
+        default=stored_args.get("tables"),
         help="Types of tables to make",
     )
     universal_parser.add_argument(
-        "Comparisons",
-        action="store",
+        "comparisons",
+        metavar="Comparisons",
         widget="Dropdown",
-        nargs="*",
         choices=["Between Group", "Within Group"],
-        default="Between Group",
+        default=stored_args.get("comparisons"),
         help="What comparisons to make",
     )
     universal_parser.add_argument(
-        "Error",
-        action="store",
+        "error",
+        metavar="Error",
         widget="Dropdown",
-        nargs="*",
         choices=["SEM", "SD"],
-        default="SEM",
+        default=stored_args.get("error"),
         help="Way error should be measured",
     )
     universal_parser.add_argument(
-        "Normality",
-        action="store",
+        "normality",
+        metavar="Normality",
         widget="Dropdown",
-        nargs="*",
         choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
-        default="Shapiro–Wilk",
+        default=stored_args.get("normality"),
         help="Which normality tests to use",
     )
     universal_parser.add_argument(
-        "Variance",
-        action="store",
+        "variance",
+        metavar="Variance",
         widget="Dropdown",
-        nargs="*",
         choices=["Levene", "Brown-Forsythe"],
-        default="Levene",
+        default=stored_args.get("variance"),
         help="Which variance tests to use",
     )
     universal_parser.add_argument(
-        "Tests",
-        action="store",
+        "tests",
+        metavar="Tests",
         widget="Dropdown",
-        nargs="*",
         choices=["Kruskal-Wallis", "Mann-Whitney"],
-        default="Kruskal-Wallis",
+        default=stored_args.get("tests"),
         help="Which statistical tests to use",
     )
     universal_parser.add_argument(
-        "Post-hoc",
-        action="store",
+        "post_hoc",
+        metavar="Post-hoc",
         widget="Dropdown",
-        nargs="*",
         choices=["Dunn", "Tukey"],
-        default="Dunn",
+        default=stored_args.get("post_hoc"),
         help="Which post hoc tests to use",
     )
-    which_paradigms = universal_parser.add_mutually_exclusive_group()
-    which_paradigms.add_argument(
-        "--Run all available paradigms", action="store_true", help="Listed on the left"
-    )
-    which_paradigms.add_argument(
-        "--Select paradigms", action="store_true", help="Use box on the right"
+    universal_parser.add_argument(
+        "--excluded_groups",
+        metavar="Excluded Groups",
+        default=stored_args.get("excluded_groups"),
+        help="Groups to exclude",
     )
     universal_parser.add_argument(
-        "--Paradigms",
-        action="store",
-        widget="Listbox",
-        nargs="*",
-        choices=[
-            "Number of Visits",
-            "Number of Nosepokes",
-            "Visit Duration",
-            "Nosepoke Duration",
-            "Time to All Corners",
-            "Time to All Nosepokes",
-            "Corner Preference",
-            "Door Preference",
-            "Zig-zags Visits",
-            "Perimeter Visits",
-            "Overtake Occurrences",
-        ],
-        help="Make multiple selections using Ctrl and Shift",
-    )
-    universal_parser.add_argument(
-        "--Excluded Groups", action="store", help="Groups to exclude"
-    )
-    universal_parser.add_argument(
-        "--Excluded Animals", action="store", help="Animals to exclude"
+        "--excluded_animals",
+        metavar="Excluded Animals",
+        default=stored_args.get("excluded_animals"),
+        help="Animals to exclude",
     )
 
     paradigm_list = [
@@ -225,101 +200,110 @@ def parse_args():
         perimeter_parser,
         overtake_parser,
     ]
-
     for paradigm_parser in paradigm_list:
         paradigm_parser.add_argument(
-            "--Data Directory",
-            action="store",
+            "data_dir",
+            metavar="Data Directory",
             widget="DirChooser",
+            default=stored_args.get("data_dir"),
             help="Input directory containing Intellicage files",
         )
         paradigm_parser.add_argument(
-            "--Output Directory",
-            action="store",
+            "out_dir",
+            metavar="Output Directory",
             widget="DirChooser",
+            default=stored_args.get("out_dir"),
             help="Output directory to save analysis",
         )
         paradigm_parser.add_argument(
-            "--Start",
-            action="store",
+            "start",
+            metavar="Start",
             widget="DateChooser",
+            default=stored_args.get("start"),
             help="Start times and dates of the phases",
         )
         paradigm_parser.add_argument(
-            "--End",
-            action="store",
+            "end",
+            metavar="End",
             widget="DateChooser",
+            default=stored_args.get("end"),
             help="End times and dates of the phases",
         )
         paradigm_parser.add_argument(
-            "--Comparisons",
-            action="store",
+            "plots",
+            metavar="Plots",
             widget="Dropdown",
-            nargs="*",
-            choices=["Between Group", "Within Group"],
-            help="What comparisons to make",
-        )
-        paradigm_parser.add_argument(
-            "--Error",
-            action="store",
-            widget="Dropdown",
-            nargs="*",
-            choices=["SEM", "SD"],
-            help="Way error should be measured",
-        )
-        paradigm_parser.add_argument(
-            "--Normality",
-            action="store",
-            widget="Dropdown",
-            nargs="*",
-            choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
-            help="Which normality tests to use",
-        )
-        paradigm_parser.add_argument(
-            "--Variance",
-            action="store",
-            widget="Dropdown",
-            nargs="*",
-            choices=["Levene", "Brown-Forsythe"],
-            help="Which variance tests to use",
-        )
-        paradigm_parser.add_argument(
-            "--Tests",
-            action="store",
-            widget="Dropdown",
-            nargs="*",
-            choices=["Kruskal-Wallis", "Mann-Whitney"],
-            help="Which statistical tests to use",
-        )
-        paradigm_parser.add_argument(
-            "--Post-hoc",
-            action="store",
-            widget="Dropdown",
-            nargs="*",
-            choices=["Dunn", "Tukey"],
-            help="Which post hoc tests to use",
-        )
-        paradigm_parser.add_argument(
-            "--Plots",
-            action="store",
-            widget="Listbox",
-            nargs="*",
-            choices=["Bar", "Line"],
+            choices=["Bar", "Line", "Box"],
+            default=stored_args.get("plots"),
             help="Types of plots to make",
         )
         paradigm_parser.add_argument(
-            "--Tables",
-            action="store",
-            widget="Listbox",
-            nargs="*",
+            "tables",
+            metavar="Tables",
+            widget="Dropdown",
             choices=["Normality", "Variance", "Post-hoc"],
+            default=stored_args.get("tables"),
             help="Types of tables to make",
         )
         paradigm_parser.add_argument(
-            "--Excluded Groups", action="store", help="Groups to exclude"
+            "comparisons",
+            metavar="Comparisons",
+            widget="Dropdown",
+            choices=["Between Group", "Within Group"],
+            default=stored_args.get("comparisons"),
+            help="What comparisons to make",
         )
         paradigm_parser.add_argument(
-            "--Excluded Animals", action="store", help="Animals to exclude"
+            "error",
+            metavar="Error",
+            widget="Dropdown",
+            choices=["SEM", "SD"],
+            default=stored_args.get("error"),
+            help="Way error should be measured",
+        )
+        paradigm_parser.add_argument(
+            "normality",
+            metavar="Normality",
+            widget="Dropdown",
+            choices=["Shapiro–Wilk", "Kolmogorov–Smirnov"],
+            default=stored_args.get("normality"),
+            help="Which normality tests to use",
+        )
+        paradigm_parser.add_argument(
+            "variance",
+            metavar="Variance",
+            widget="Dropdown",
+            choices=["Levene", "Brown-Forsythe"],
+            default=stored_args.get("variance"),
+            help="Which variance tests to use",
+        )
+        paradigm_parser.add_argument(
+            "tests",
+            metavar="Tests",
+            widget="Dropdown",
+            choices=["Kruskal-Wallis", "Mann-Whitney"],
+            default=stored_args.get("tests"),
+            help="Which statistical tests to use",
+        )
+        paradigm_parser.add_argument(
+            "post_hoc",
+            metavar="Post-hoc",
+            widget="Dropdown",
+            choices=["Dunn", "Tukey"],
+            default=stored_args.get("post_hoc"),
+            help="Which post hoc tests to use",
+        )
+        paradigm_parser.add_argument(
+            "--excluded_groups",
+            metavar="Excluded Groups",
+            default=stored_args.get("excluded_groups"),
+            help="Groups to exclude",
+        )
+        paradigm_parser.add_argument(
+            "--excluded_animals",
+            metavar="Excluded Animals",
+            default=stored_args.get("excluded_animals"),
+            help="Animals to exclude",
         )
 
     args = parser.parse_args()
@@ -332,25 +316,4 @@ def parse_args():
 
 if __name__ == "__main__":
     conf = parse_args()
-    # us.create_project_layout(
-    #     conf.data_directory, conf.output_directory, conf.project_name
-    # )
-    # us.create_notebook(
-    #     conf.data_directory,
-    #     conf.output_directory,
-    #     conf.project_name,
-    #     conf.paradigms,
-    #     conf.start,
-    #     conf.end,
-    #     conf.excluded_groups,
-    #     conf.excluded_animals,
-    #     conf.comparisons,
-    #     conf.error,
-    #     conf.normality,
-    #     conf.variance,
-    #     conf.tests,
-    #     conf.post_hoc,
-    #     conf.plots,
-    #     conf.tables,
-    # )
     print("Done")
