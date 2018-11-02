@@ -42,13 +42,6 @@ def parse_args():
         with open(args_file) as data_file:
             stored_args = jn.load(data_file)
     parser = gy.GooeyParser(description="GPLv3 - Emir Turkes; Phenovance LLC")
-    # parser.add_argument(
-    #     "--verbose",
-    #     help="be verbose",
-    #     dest="verbose",
-    #     action="store_true",
-    #     default=False,
-    # )
     subs = parser.add_subparsers()
 
     universal_parser = subs.add_parser(
