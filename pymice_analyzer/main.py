@@ -22,8 +22,8 @@
 """The main CLI and GUI routine."""
 
 
-import os
 import json as jn
+import os
 
 import gooey as gy
 
