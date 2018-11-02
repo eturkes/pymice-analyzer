@@ -35,12 +35,27 @@ def parse_args():
     """Use GooeyParser to build up arguments in the script and save the arguments in a
     default json file so that they can be retrieved each time the script is ran.
     """
-    parser = gy.GooeyParser(
-        description="GPLv3 - Emir Turkes; Phenovance LLC"
+    stored_args = {}
+    args_file = "pymice-analyzer-args.json"
+    # Read in the prior arguments as a dictionary.
+    if os.path.isfile(args_file):
+        with open(args_file) as data_file:
+            stored_args = jn.load(data_file)
+    parser = gy.GooeyParser(description="GPLv3 - Emir Turkes; Phenovance LLC")
+    parser.add_argument(
+        "--verbose",
+        help="be verbose",
+        dest="verbose",
+        action="store_true",
+        default=False,
     )
-    subs = parser.add_subparsers()
+    subs = parser.add_subparsers(help="commands", dest="command")
 
-    universal_parser = subs.add_parser("Universal Settings")
+    universal_parser = subs.add_parser(
+        "universal_settings",
+        prog="Universal Settings",
+        help="Blanket settings for all paradigms",
+    )
     num_visits_parser = subs.add_parser("Number of Visits")
     num_pokes_parser = subs.add_parser("Number of Nosepokes")
     visit_dur_parser = subs.add_parser("Visit Duration")
@@ -54,13 +69,18 @@ def parse_args():
     overtake_parser = subs.add_parser("Overtake Occurrences")
 
     universal_parser.add_argument(
-        "Project Name", action="store", help="Name of your project"
+        "project_name",
+        metavar="Project Name",
+        action="store",
+        help="Name of your project",
+        default=stored_args.get("project_name"),
     )
     universal_parser.add_argument(
-        "Run pipeline after generating scripts?",
-        action="store",
-        widget="CheckBox",
-        help="   If unchecked, use 'run-all.py' in project directory.",
+        "--run_pipeline",
+        metavar="Run pipeline after generating scripts",
+        action="store_true",
+        default=False,
+        help="If unchecked use run-all.py in project directory",
     )
     universal_parser.add_argument(
         "Data Directory",
@@ -87,12 +107,12 @@ def parse_args():
         help="End times and dates of the phases",
     )
     universal_parser.add_argument(
-        "Plots",
-        action="store",
+        "--plots",
+        metavar="Plots",
+        required=True,
         widget="Listbox",
-        nargs="*",
+        nargs="+",
         choices=["Bar", "Line", "Box"],
-        default=["Bar"],
         help="Types of plots to make",
     )
     universal_parser.add_argument(
@@ -302,30 +322,35 @@ def parse_args():
             "--Excluded Animals", action="store", help="Animals to exclude"
         )
 
-    return parser.parse_args()
+    args = parser.parse_args()
+    # Store the values of the arguments so that it is available on next run.
+    with open(args_file, "w") as data_file:
+        # Using vars(args) returns the data as a dictionary.
+        jn.dump(vars(args), data_file)
+    return args
 
 
 if __name__ == "__main__":
     conf = parse_args()
-    us.create_project_layout(
-        conf.data_directory, conf.output_directory, conf.project_name
-    )
-    us.create_notebook(
-        conf.data_directory,
-        conf.output_directory,
-        conf.project_name,
-        conf.paradigms,
-        conf.start,
-        conf.end,
-        conf.excluded_groups,
-        conf.excluded_animals,
-        conf.comparisons,
-        conf.error,
-        conf.normality,
-        conf.variance,
-        conf.tests,
-        conf.post_hoc,
-        conf.plots,
-        conf.tables,
-    )
+    # us.create_project_layout(
+    #     conf.data_directory, conf.output_directory, conf.project_name
+    # )
+    # us.create_notebook(
+    #     conf.data_directory,
+    #     conf.output_directory,
+    #     conf.project_name,
+    #     conf.paradigms,
+    #     conf.start,
+    #     conf.end,
+    #     conf.excluded_groups,
+    #     conf.excluded_animals,
+    #     conf.comparisons,
+    #     conf.error,
+    #     conf.normality,
+    #     conf.variance,
+    #     conf.tests,
+    #     conf.post_hoc,
+    #     conf.plots,
+    #     conf.tables,
+    # )
     print("Done")
