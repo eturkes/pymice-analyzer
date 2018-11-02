@@ -29,7 +29,7 @@ import nbformat as nbf
 
 
 def create_project_layout(data_dir, proj_path):
-    """Creates layout of project directories"""
+    """Creates layout of project directories."""
     os.makedirs(os.path.join(proj_path, "pipeline"))
     os.mkdir(os.path.join(proj_path, "pipeline", "timeline"))
     os.mkdir(os.path.join(proj_path, "data"))
