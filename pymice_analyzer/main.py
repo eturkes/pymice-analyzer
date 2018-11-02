@@ -316,4 +316,5 @@ def parse_args():
 
 if __name__ == "__main__":
     conf = parse_args()
+    us.create_project_layout(conf.data_dir, conf.out_dir, conf.proj_name)
     print("Done")
