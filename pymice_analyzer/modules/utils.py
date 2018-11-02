@@ -22,6 +22,8 @@
 """Load and clean data from Intellicage."""
 
 
+import glob
+
 import pymice as pm
 
 
@@ -30,16 +32,12 @@ def load_data(*args, **kwargs):
     data_files = [0 for x in range(len(args))]
     for i in range(0, len(args)):
         data_files[i] = args[i]
-
     # Merge the data.
     loaders = [pm.Loader(filename) for filename in data_files]
     data = pm.Merger(*loaders)
-    print("Done loading data.")
-    for mouse in sorted(data.getGroup()):
-        print(mouse)
 
     # Read in period of analysis from timeline.ini.
-    timeline = pm.Timeline("../timeline/hab1.ini")
+    timeline = pm.Timeline(glob.glob("../timeline/*.ini"))
     start1, end1 = timeline.getTimeBounds(kwargs["phase1"])
     start2, end2 = timeline.getTimeBounds(kwargs["phase2"])
     print("%s:\t%s - %s" % (kwargs["phase1"], start1, end1))
