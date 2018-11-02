@@ -49,18 +49,6 @@ def parse_args():
         prog="Universal Settings",
         help="Blanket settings for all paradigms",
     )
-    num_visits_parser = subs.add_parser("num_visits", prog="Number of Visits")
-    num_pokes_parser = subs.add_parser("num_pokes", prog="Number of Nosepokes")
-    visit_dur_parser = subs.add_parser("visit_dur", prog="Visit Duration")
-    poke_dur_parser = subs.add_parser("poke_dur", prog="Nosepoke Duration")
-    time_corners_parser = subs.add_parser("time_corners", prog="Time to All Corners")
-    time_pokes_parser = subs.add_parser("time_pokes", prog="Time to All Nosepokes")
-    corner_pref_parser = subs.add_parser("corner_pref", prog="Corner Preference")
-    door_pref_parser = subs.add_parser("door_pref", prog="Door Preference")
-    zig_zag_parser = subs.add_parser("zig_zag", prog="Zig-zag Visits")
-    perimeter_parser = subs.add_parser("perimeter", prog="Perimeter Visits")
-    overtake_parser = subs.add_parser("overtake", prog="Overtake Occurrences")
-
     universal_parser.add_argument(
         "proj_name",
         metavar="Project Name",
@@ -180,20 +168,21 @@ def parse_args():
         help="Animals to exclude",
     )
 
-    paradigm_list = [
-        num_visits_parser,
-        num_pokes_parser,
-        visit_dur_parser,
-        poke_dur_parser,
-        time_corners_parser,
-        time_pokes_parser,
-        corner_pref_parser,
-        door_pref_parser,
-        zig_zag_parser,
-        perimeter_parser,
-        overtake_parser,
-    ]
-    for paradigm_parser in paradigm_list:
+    all_paradigms = {
+        "num_visits": "Number of Visits",
+        "num_pokes": "Number of Nosepokes",
+        "visit_dur": "Visit Duration",
+        "poke_dur": "Nosepoke Duration",
+        "time_corners": "Time to All Corners",
+        "time_pokes": "Time to All Pokes",
+        "corner_pref": "Corner Preferences",
+        "door_pref": "Door Preference",
+        "zig_zag": "Zig-zag Visits",
+        "perimeter": "Perimeter Visits",
+        "overtake": "Overtake Occurrences",
+    }
+    for paradigm in all_paradigms:
+        paradigm_parser = subs.add_parser(paradigm, prog=all_paradigms[paradigm])
         paradigm_parser.add_argument(
             "data_dir",
             metavar="Data Directory",
