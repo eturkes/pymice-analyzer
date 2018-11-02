@@ -22,7 +22,7 @@
 """Load and clean data from Intellicage."""
 
 
-import glob
+import glob as gb
 
 import pymice as pm
 
@@ -37,7 +37,7 @@ def load_data(*args, **kwargs):
     data = pm.Merger(*loaders)
 
     # Read in period of analysis from timeline.ini.
-    timeline = pm.Timeline(glob.glob("../timeline/*.ini"))
+    timeline = pm.Timeline(gb.glob("../timeline/*.ini"))
     start1, end1 = timeline.getTimeBounds(kwargs["phase1"])
     start2, end2 = timeline.getTimeBounds(kwargs["phase2"])
     print("%s:\t%s - %s" % (kwargs["phase1"], start1, end1))
