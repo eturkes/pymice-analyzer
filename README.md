@@ -20,7 +20,13 @@
 
 # PyMICE Analyzer
 
-Tools to expand the functionality of [PyMICE](https://github.com/Neuroinflab/PyMICE)
+PyMICE Analyzer is a GUI and CLI project creator and pipeline manipulator. It is
+distinct from full-featured platforms in that it leverages the power and familiarity of
+standard data science tools like Jupyter and Docker. Projects are structured to suit the
+particular workflow of Intellicage with PyMICE and are bundled with a variety of
+utilities to encourage proper archivial for reproducibility. Available pipeline options
+are pulled directly from PyMICE Modules and included in the project structure, allowing
+for easy updating and shipping of specific versions with the code.
 
 ## Screenshots
 
