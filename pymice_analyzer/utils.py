@@ -115,8 +115,10 @@ excluded_animals = ("{excluded_animals}")
 
 # Main routine.
 data, start, end = modules.utils.load_data(
-glob.glob("{rel_data_dir}/*.zip"), 
-phase1="Phase 1")"""
+    glob.glob("{rel_data_dir}/*.zip"), 
+    start=start,
+    end=end,
+)"""
 
         cell_4 = """\
 ## Statistical Testing"""

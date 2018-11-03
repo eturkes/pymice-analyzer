@@ -22,6 +22,7 @@
 """Load and clean data from Intellicage."""
 
 
+import configparser as cp
 import os
 import re
 import sys
@@ -55,9 +56,17 @@ def load_data(*args, **kwargs):
     loaders = [pm.Loader(filename) for filename in args[0]]
     data = pm.Merger(*loaders)
 
+    # Update timeline.ini
+    conf = cp.ConfigParser()
+    conf.read("timeline/timeline.ini")
+    conf["Phase 1"]["start"] = kwargs["start"]
+    conf["Phase 1"]["end"] = kwargs["end"]
+    with open(os.path.join("timeline/timeline.ini"), "w") as file:
+        conf.write(file)
+
     # Read in period of analysis from timeline.ini.
     timeline = pm.Timeline("timeline/timeline.ini")
-    start, end = timeline.getTimeBounds(kwargs["phase1"])
+    start, end = timeline.getTimeBounds("Phase 1")
 
     # Check for any problems (indicated in the log) during the period of interest.
     data_validator = pm.DataValidator(pm.PresenceLogAnalyzer())
