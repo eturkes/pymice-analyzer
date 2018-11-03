@@ -22,8 +22,6 @@
 """Load and clean data from Intellicage."""
 
 
-import glob as gb
-
 import pymice as pm
 
 
@@ -37,18 +35,16 @@ def load_data(*args, **kwargs):
     data = pm.Merger(*loaders)
 
     # Read in period of analysis from timeline.ini.
-    timeline = pm.Timeline(gb.glob("../timeline/*.ini"))
-    start1, end1 = timeline.getTimeBounds(kwargs["phase1"])
-    start2, end2 = timeline.getTimeBounds(kwargs["phase2"])
-    print("%s:\t%s - %s" % (kwargs["phase1"], start1, end1))
-    print("%s:\t%s - %s" % (kwargs["phase2"], start2, end2))
+    timeline = pm.Timeline("../timeline/timeline.ini")
+    start, end = timeline.getTimeBounds(kwargs["phase1"])
 
     # Check for any problems (indicated in the log) during the period of interest.
     data_validator = pm.DataValidator(pm.PresenceLogAnalyzer())
     validator_report = data_validator(data)
     no_presence_problems = pm.FailureInspector("Presence")
-    if no_presence_problems(validator_report, (start1, end1)):
-        if no_presence_problems(validator_report, (start2, end2)):
-            print("Presences OK.")
+    if no_presence_problems(validator_report, (start, end)):
+        pass
+    else:
+        print("Possible transponder problems")
 
-    return data, start1, end1, start2, end2
+    return data, start, end
