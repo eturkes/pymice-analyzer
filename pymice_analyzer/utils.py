@@ -86,6 +86,10 @@ def create_notebook(
     tables,
 ):
     """Produces a Jupyter Notebook .ipynb file."""
+    # Get only the last part of data_dir for loading data later.
+    rel_data_dir = os.path.join(
+        "..", "data", os.path.basename(os.path.normpath(data_dir))
+    )
 
     for paradigm in all_paradigms:
         nb = nbf.v4.new_notebook()
@@ -95,6 +99,7 @@ def create_notebook(
 
         cell_1 = """\
         # Load modules necessary for the notebook to run.
+        import glob
         import modules.utils
         modules.utils.import_all("modules", globals())"""
 
@@ -108,7 +113,10 @@ def create_notebook(
         excluded_groups = ("{excluded_groups}")
         excluded_animals = ("{excluded_animals}")
         
-        # Main routine."""
+        # Main routine.
+        data, start, end = modules.utils.load_data(
+            glob.glob("{rel_data_dir}/*.zip"), 
+            phase1="Phase 1")"""
 
         cell_4 = """\
         ## Statistical Testing"""

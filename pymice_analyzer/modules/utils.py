@@ -51,15 +51,12 @@ def import_all(path, env):
 
 def load_data(*args, **kwargs):
     """Loads the data and checks its validity."""
-    data_files = [0 for x in range(len(args))]
-    for i in range(0, len(args)):
-        data_files[i] = args[i]
     # Merge the data.
-    loaders = [pm.Loader(filename) for filename in data_files]
+    loaders = [pm.Loader(filename) for filename in args[0]]
     data = pm.Merger(*loaders)
 
     # Read in period of analysis from timeline.ini.
-    timeline = pm.Timeline("../timeline/timeline.ini")
+    timeline = pm.Timeline("timeline/timeline.ini")
     start, end = timeline.getTimeBounds(kwargs["phase1"])
 
     # Check for any problems (indicated in the log) during the period of interest.
