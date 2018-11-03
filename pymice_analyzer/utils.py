@@ -95,52 +95,52 @@ def create_notebook(
         nb = nbf.v4.new_notebook()
 
         cell_0 = f"""\
-        # {all_paradigms[paradigm]} - {proj_name}"""
+# {all_paradigms[paradigm]} - {proj_name}"""
 
         cell_1 = """\
-        # Load modules necessary for the notebook to run.
-        import glob
-        import modules.utils
-        modules.utils.import_all("modules", globals())"""
+# Load modules necessary for the notebook to run.
+import glob
+import modules.utils
+modules.utils.import_all("modules", globals())"""
 
         cell_2 = """
-        ## Run Paradigm"""
+## Run Paradigm"""
 
         cell_3 = f"""\
-        # Input arguments.
-        start = ("{start}")
-        end = ("{end}")
-        excluded_groups = ("{excluded_groups}")
-        excluded_animals = ("{excluded_animals}")
-        
-        # Main routine.
-        data, start, end = modules.utils.load_data(
-            glob.glob("{rel_data_dir}/*.zip"), 
-            phase1="Phase 1")"""
+# Input arguments.
+start = ("{start}")
+end = ("{end}")
+excluded_groups = ("{excluded_groups}")
+excluded_animals = ("{excluded_animals}")
+
+# Main routine.
+data, start, end = modules.utils.load_data(
+glob.glob("{rel_data_dir}/*.zip"), 
+phase1="Phase 1")"""
 
         cell_4 = """\
-        ## Statistical Testing"""
+## Statistical Testing"""
 
         cell_5 = f"""\
-        # Input arguments.
-        comparisons = ("{comparisons}")
-        error = ("{error}")
-        normality = ("{normality}")
-        variance = ("{variance}")
-        tests = ("{tests}")
-        post_hoc = ("{post_hoc}")
-        
-        # Main routine."""
+# Input arguments.
+comparisons = ("{comparisons}")
+error = ("{error}")
+normality = ("{normality}")
+variance = ("{variance}")
+tests = ("{tests}")
+post_hoc = ("{post_hoc}")
+
+# Main routine."""
 
         cell_6 = """\
-        ## Generate Figures"""
+## Generate Figures"""
 
         cell_7 = f"""\
-        # Input arguments.
-        plots = ("{plots}")
-        tables = ("{tables}")
-        
-        # Main routine."""
+# Input arguments.
+plots = ("{plots}")
+tables = ("{tables}")
+
+# Main routine."""
 
         nb["cells"] = [
             nbf.v4.new_markdown_cell(cell_0),
