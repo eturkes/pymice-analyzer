@@ -95,10 +95,10 @@ def create_notebook(
 
         cell_1 = """\
         # Load modules necessary for the notebook to run.
-        import modules.importdir
-        importdir.do("modules", globals())"""
+        import modules.utils
+        modules.utils.import_all("modules", globals())"""
 
-        cell_2 = """\
+        cell_2 = """
         ## Run Paradigm"""
 
         cell_3 = f"""\
