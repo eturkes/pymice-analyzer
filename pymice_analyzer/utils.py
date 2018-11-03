@@ -22,6 +22,7 @@
 """Miscellaneous methods to help with the main routine."""
 
 
+import configparser as cp
 import os
 import shutil as sl
 
@@ -51,6 +52,19 @@ def create_project_layout(data_dir, proj_path):
         ),
         os.path.join(proj_path, "pipeline", "timeline", "1-min-bin.sh"),
     )
+
+
+def create_timeline(start, end, tzinfo, proj_path):
+    """Creates timeline INI file."""
+    conf = cp.ConfigParser()
+    conf.add_section("Phase 1")
+    conf["Phase 1"]["start"] = start
+    conf["Phase 1"]["end"] = end
+    conf["Phase 1"]["tzinfo"] = tzinfo
+    with open(
+        os.path.join(proj_path, "pipeline", "timeline", "timeline.ini"), "w"
+    ) as file:
+        conf.write(file)
 
 
 def create_notebook(

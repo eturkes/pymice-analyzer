@@ -24,8 +24,10 @@
 
 import json as jn
 import os
+import re
 
 import gooey as gy
+import pytz as pz
 
 import utils as us
 
@@ -56,12 +58,12 @@ def parse_args():
         help="Name of your project",
     )
     universal_parser.add_argument(
-        "run_all",
-        metavar="Run pipeline after generating scripts?",
+        "tzinfo",
+        metavar="Time Zone",
         widget="Dropdown",
-        choices=["Yes", "No"],
-        default=stored_args.get("run_all"),
-        help="If unchecked use run-all.py in project directory",
+        choices=list(filter(re.compile(".*GMT").match, pz.all_timezones)),
+        default=stored_args.get("tzinfo"),
+        help="Time zone where Intellicage data was collected",
     )
     universal_parser.add_argument(
         "data_dir",
@@ -302,6 +304,7 @@ if __name__ == "__main__":
     all_paradigms = conf[1]
     proj_path = os.path.join(args.proj_dir, args.proj_name.lower().replace(" ", "_"))
     us.create_project_layout(args.data_dir, proj_path)
+    us.create_timeline(args.start, args.end, args.tzinfo, proj_path)
     us.create_notebook(
         all_paradigms,
         args.data_dir,
