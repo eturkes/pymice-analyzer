@@ -16,7 +16,7 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
-name: pymice-analyzer
+name: pymice-analyzer-dev
 channels:
   - defaults
 dependencies:

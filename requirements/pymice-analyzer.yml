@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #    This file is part of pymice-analyzer.
 #    Copyright (C) 2018  Emir Turkes
 #
@@ -18,18 +16,15 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
-# This script keeps the pymice-analyzer conda env up-to-date. It first upgrades all
-# conda packages and then all pip packages. To help ensure the most important packages
-# stay at the highest version possible, we upgrade them manually after upgrading all of
-# the packages. pip is also upgraded manually because conda keeps it at an unusually
-# old version.
-
-# Call the script using ". ./upgrade-env". Note the first dot, this necessary to make
-# conda available by executing the script in the current shell.
-
-echo Upgrade\ conda\ environment: \
-    && conda activate pymice-analyzer \
-    && conda update --all \
-    && conda list | grep "<pip>" | cut -d " " -f 1 | xargs pip install -U \
-    && conda update anaconda wxpython \
-    && pip install -U black gooey pymice pip
+name: pymice-analyzer
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - anaconda
+  - pyhamcrest # twisted requires this but conda doesn't install it for some reason
+  - wxpython
+  - pip:
+    - gooey
+    - pymice
+    - pypubsub # wxpython requires this but conda doesn't install it for some reason
