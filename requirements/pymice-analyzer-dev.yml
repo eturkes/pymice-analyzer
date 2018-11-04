@@ -24,6 +24,7 @@ dependencies:
   - anaconda
   - pyhamcrest # twisted requires this but conda doesn't install it for some reason
   - wxpython
+  - gitpython
   - pip:
     - black
     - gooey

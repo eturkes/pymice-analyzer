@@ -26,6 +26,7 @@ import os
 import shutil as sl
 
 import nbformat as nbf
+import git
 
 
 def create_project_layout(data_dir, proj_path):
@@ -40,6 +41,10 @@ def create_project_layout(data_dir, proj_path):
             os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
         ),
         os.path.join(proj_path, "inspect-pipeline.sh"),
+    )
+    git.Repo.clone_from(
+        "https://github.com/eturkes/pymice-modules",
+        os.path.join(proj_path, "pipeline", "modules"),
     )
 
 

@@ -31,5 +31,5 @@ echo Upgrade\ pymice-analyzer-dev\ conda\ environment: \
     && conda activate pymice-analyzer-dev \
     && conda update --all \
     && conda list | grep "<pip>" | cut -d " " -f 1 | xargs pip install -U \
-    && conda update anaconda wxpython \
+    && conda update anaconda wxpython gitpython \
     && pip install -U black gooey pymice pip
