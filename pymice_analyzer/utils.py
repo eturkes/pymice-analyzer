@@ -36,7 +36,9 @@ def create_project_layout(data_dir, proj_path):
     os.mkdir(os.path.join(proj_path, "output"))
     os.symlink(data_dir, os.path.join(proj_path, "data", "intellicage"))
     sl.copy2(
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "inspect-pipeline.sh"),
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
+        ),
         os.path.join(proj_path, "inspect-pipeline.sh"),
     )
 

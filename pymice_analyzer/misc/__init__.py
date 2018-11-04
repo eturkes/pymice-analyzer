@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*
+
 #    This file is part of pymice-analyzer.
 #    Copyright (C) 2018  Emir Turkes
 #
@@ -15,22 +18,3 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
-
-
-import setuptools as st
-
-
-st.setup(
-    name="PyMICE-analyzer",
-    version="0.1.0",
-    description="A PyMICE project creator and pipeline manipulator",
-    author="Emir Turkes",
-    author_email="eturkes@bu.edu",
-    url="https://github.com/eturkes/pymice-analyzer",
-    packages=["pymice_analyzer", "pymice_analyzer.misc"],
-    package_data={"pymice_analyzer.misc": ["*.sh"]},
-    entry_points={"console_scripts": ["PyMICE-analyzer=pymice_analyzer.main:main"]},
-    zip_safe=False,
-    keywords="PyMICE-analyzer",
-    classifiers=["Programming Language :: Python :: 3.6"],
-)
