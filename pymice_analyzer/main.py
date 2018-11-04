@@ -29,7 +29,7 @@ import re
 import gooey as gy
 import pytz as pz
 
-import pymice_analyzer.utils as us
+import pymice_analyzer.utils as ut
 
 
 @gy.Gooey(program_name="PyMICE Analyzer", show_sidebar=True, sidebar_title="Paradigms")
@@ -303,8 +303,8 @@ def main():
     args = conf[0]
     all_paradigms = conf[1]
     proj_path = os.path.join(args.proj_dir, args.proj_name.lower().replace(" ", "_"))
-    us.create_project_layout(args.data_dir, proj_path)
-    us.create_notebook(
+    ut.create_project_layout(args.data_dir, proj_path)
+    ut.create_notebook(
         all_paradigms,
         args.data_dir,
         proj_path,
