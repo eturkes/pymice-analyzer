@@ -22,7 +22,6 @@
 """Miscellaneous methods to help with the main routine."""
 
 
-import configparser as cp
 import os
 import shutil as sl
 
@@ -36,35 +35,10 @@ def create_project_layout(data_dir, proj_path):
     os.mkdir(os.path.join(proj_path, "data"))
     os.mkdir(os.path.join(proj_path, "output"))
     os.symlink(data_dir, os.path.join(proj_path, "data", "intellicage"))
-    sl.copytree(
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "modules"),
-        os.path.join(proj_path, "pipeline", "modules"),
-    )
     sl.copy2(
-        os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
-        ),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "inspect-pipeline.sh"),
         os.path.join(proj_path, "inspect-pipeline.sh"),
     )
-    sl.copy2(
-        os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "misc", "1-min-bin.sh"
-        ),
-        os.path.join(proj_path, "pipeline", "timeline", "1-min-bin.sh"),
-    )
-
-
-def create_timeline(start, end, tzinfo, proj_path):
-    """Creates timeline INI file."""
-    conf = cp.ConfigParser()
-    conf.add_section("Phase 1")
-    conf["Phase 1"]["start"] = start
-    conf["Phase 1"]["end"] = end
-    conf["Phase 1"]["tzinfo"] = tzinfo
-    with open(
-        os.path.join(proj_path, "pipeline", "timeline", "timeline.ini"), "w"
-    ) as file:
-        conf.write(file)
 
 
 def create_notebook(

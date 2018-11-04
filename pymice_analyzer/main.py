@@ -304,7 +304,6 @@ if __name__ == "__main__":
     all_paradigms = conf[1]
     proj_path = os.path.join(args.proj_dir, args.proj_name.lower().replace(" ", "_"))
     us.create_project_layout(args.data_dir, proj_path)
-    us.create_timeline(args.start, args.end, args.tzinfo, proj_path)
     us.create_notebook(
         all_paradigms,
         args.data_dir,

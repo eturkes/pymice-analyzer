@@ -18,36 +18,6 @@
     Emir Turkes can be contacted at eturkes@bu.edu
 -->
 
-### Input
-* PyMICE-tools [project-name].ini (see example.ini)
-* GUI creates INI files and runs it
-
-### Output
-* All underneath dir with project name
-* src dir with .py files
-* analysis dir with output
-* Dockerfile from analysis, if available
-* environment.yml from analysis
-
-### Rerun
-* Prompt if dir already exists
-* Move old dir to .bak
-* If .bak already exists, .bak.bak, etc.
-
-### Analysis
-* Use Docker if available
-* Otherwise, use virtualenv
-
-### CLI
-* Use argparse for Gooey and Wooey support
-
-### GUI
-* Use Gooey
-* Consider PyQt5 as an alternative because of wxPython dependency issues
-
-### Web
-* Use Wooey to set up a data analysis server
-
 ### Git
 * Use branches for different implementations
 * Push directly to master until 1.0.0 release
