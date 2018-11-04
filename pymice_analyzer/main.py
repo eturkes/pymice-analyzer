@@ -29,7 +29,7 @@ import re
 import gooey as gy
 import pytz as pz
 
-import utils as us
+import pymice_analyzer.utils as us
 
 
 @gy.Gooey(program_name="PyMICE Analyzer", show_sidebar=True, sidebar_title="Paradigms")
@@ -298,7 +298,7 @@ def parse_args():
     return args, all_paradigms
 
 
-if __name__ == "__main__":
+def main():
     conf = parse_args()
     args = conf[0]
     all_paradigms = conf[1]
