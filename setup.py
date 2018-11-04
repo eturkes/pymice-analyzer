@@ -23,7 +23,7 @@ import setuptools as st
 st.setup(
     name="PyMICE-analyzer",
     version="0.1.0",
-    description="A PyMICE project creation tool",
+    description="A PyMICE project creator and pipeline manipulator",
     author="Emir Turkes",
     author_email="eturkes@bu.edu",
     url="https://github.com/eturkes/pymice-analyzer",
