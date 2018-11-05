@@ -117,22 +117,23 @@ excluded_animals = ("{excluded_animals}")
 
 # Main routine.
 import glob
-import pymice_analyzer.pymice_modules.utils.import_all
-pymice_analyzer.pymice_modules.utils.import_all.import_all(
-    "pymice_analyzer.pymice_modules.utils", globals()
+import modules.utils.import_all
+import modules.utils.load_data
+modules.utils.import_all.import_all(
+    "modules/utils", globals()
 )
-pymice_analyzer.pymice_modules.utils.import_all.import_all(
-    "pymice_analyzer.pymice_modules.paradigms", globals()
+modules.utils.import_all.import_all(
+    "modules/paradigms", globals()
 )
-pymice_analyzer.pymice_modules.utils.import_all.import_all(
-    "pymice_analyzer.pymice_modules.stats", globals()
+modules.utils.import_all.import_all(
+    "modules/stats", globals()
 )
-pymice_analyzer.pymice_modules.utils.import_all.import_all(
-    "pymice_analyzer.pymice_modules.display", globals()
+modules.utils.import_all.import_all(
+    "modules/display", globals()
 )
 
-data, start, end = pymice_analyzer.pymice_modules.utils.load_data.load_data(
-    glob.glob("{rel_data_dir}/*.zip"), 
+data, start, end = modules.utils.load_data.load_data(
+    glob.glob("../../intellicage/*.zip"), 
     start=start,
     end=end,
 )"""
