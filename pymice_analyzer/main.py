@@ -186,35 +186,21 @@ def parse_args():
     for paradigm in all_paradigms:
         paradigm_parser = subs.add_parser(paradigm, prog=all_paradigms[paradigm])
         paradigm_parser.add_argument(
-            "data_dir",
-            metavar="Data Directory",
-            widget="DirChooser",
-            default=stored_args.get("data_dir"),
-            help="Input directory containing Intellicage files",
-        )
-        paradigm_parser.add_argument(
-            "proj_dir",
-            metavar="Output Directory",
-            widget="DirChooser",
-            default=stored_args.get("proj_dir"),
-            help="Output directory to save analysis",
-        )
-        paradigm_parser.add_argument(
-            "start",
+            "--start",
             metavar="Start",
             widget="DateChooser",
             default=stored_args.get("start"),
             help="Start times and dates of the phases",
         )
         paradigm_parser.add_argument(
-            "end",
+            "--end",
             metavar="End",
             widget="DateChooser",
             default=stored_args.get("end"),
             help="End times and dates of the phases",
         )
         paradigm_parser.add_argument(
-            "plots",
+            "--plots",
             metavar="Plots",
             widget="Dropdown",
             choices=["Bar", "Line", "Box"],
@@ -222,7 +208,7 @@ def parse_args():
             help="Types of plots to make",
         )
         paradigm_parser.add_argument(
-            "tables",
+            "--tables",
             metavar="Tables",
             widget="Dropdown",
             choices=["Normality", "Variance", "Post-hoc"],
@@ -230,7 +216,7 @@ def parse_args():
             help="Types of tables to make",
         )
         paradigm_parser.add_argument(
-            "comparisons",
+            "--comparisons",
             metavar="Comparisons",
             widget="Dropdown",
             choices=["Between Group", "Within Group"],
@@ -238,7 +224,7 @@ def parse_args():
             help="What comparisons to make",
         )
         paradigm_parser.add_argument(
-            "error",
+            "--error",
             metavar="Error",
             widget="Dropdown",
             choices=["SEM", "SD"],
@@ -246,7 +232,7 @@ def parse_args():
             help="Way error should be measured",
         )
         paradigm_parser.add_argument(
-            "normality",
+            "--normality",
             metavar="Normality",
             widget="Dropdown",
             choices=["Shapiro-Wilk", "Kolmogorov-Smirnov"],
@@ -254,7 +240,7 @@ def parse_args():
             help="Which normality tests to use",
         )
         paradigm_parser.add_argument(
-            "variance",
+            "--variance",
             metavar="Variance",
             widget="Dropdown",
             choices=["Levene", "Brown-Forsythe"],
@@ -262,7 +248,7 @@ def parse_args():
             help="Which variance tests to use",
         )
         paradigm_parser.add_argument(
-            "tests",
+            "--tests",
             metavar="Tests",
             widget="Dropdown",
             choices=["Kruskal-Wallis", "Mann-Whitney"],
@@ -270,7 +256,7 @@ def parse_args():
             help="Which statistical tests to use",
         )
         paradigm_parser.add_argument(
-            "post_hoc",
+            "--post_hoc",
             metavar="Post-hoc",
             widget="Dropdown",
             choices=["Dunn", "Tukey"],
