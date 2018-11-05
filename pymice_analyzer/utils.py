@@ -104,7 +104,7 @@ excluded_groups = ("{excluded_groups}")
 excluded_animals = ("{excluded_animals}")
 
 # Main routine.
-import glob as glob
+import glob
 import pymice_analyzer.pymice_modules.utils.import_all
 pymice_analyzer.pymice_modules.utils.import_all.import_all(
     "pymice_analyzer.pymice_modules.utils", globals()
