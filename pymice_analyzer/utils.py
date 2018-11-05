@@ -75,7 +75,7 @@ def create_notebook(
     )
 
     for paradigm in all_paradigms:
-        nb = nbf.v4.new_notebook()
+        notebook = nbf.v4.new_notebook()
 
         cell_0 = f"""\
 # {all_paradigms[paradigm]} - {proj_name}"""
@@ -127,7 +127,7 @@ tables = ("{tables}")
 
 # Main routine."""
 
-        nb["cells"] = [
+        notebook["cells"] = [
             nbf.v4.new_markdown_cell(cell_0),
             nbf.v4.new_code_cell(cell_1),
             nbf.v4.new_markdown_cell(cell_2),
@@ -140,4 +140,4 @@ tables = ("{tables}")
 
         pipeline_dir = os.path.join(proj_path, "pipeline")
         notebook_file_name = all_paradigms[paradigm].lower().replace(" ", "_")
-        nbf.write(nb, f"{os.path.join(pipeline_dir, notebook_file_name)}.ipynb")
+        nbf.write(notebook, f"{os.path.join(pipeline_dir, notebook_file_name)}.ipynb")
