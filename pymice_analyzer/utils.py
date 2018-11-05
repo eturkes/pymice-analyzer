@@ -38,9 +38,11 @@ def create_project_layout(data_dir, proj_path):
     os.symlink(data_dir, os.path.join(proj_path, "data", "intellicage"))
     sl.copy2(
         os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "misc", "inspect-pipeline.sh"
+            os.path.dirname(os.path.abspath(__file__)),
+            "misc",
+            "docker-jupyter-notebook.sh",
         ),
-        os.path.join(proj_path, "inspect-pipeline.sh"),
+        os.path.join(proj_path, "docker-jupyter-notebook.sh"),
     )
     git.Repo.clone_from(
         "https://github.com/eturkes/pymice-modules",
