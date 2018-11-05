@@ -46,8 +46,13 @@ def create_project_layout(data_dir, proj_path):
     )
     git.Repo.clone_from(
         "https://github.com/eturkes/pymice-modules",
+        os.path.join(proj_path, "pipeline", "pymice-modules"),
+    )
+    sl.move(
+        os.path.join(proj_path, "pipeline", "pymice-modules", "pymice_modules"),
         os.path.join(proj_path, "pipeline", "modules"),
     )
+    sl.rmtree(os.path.join(proj_path, "pipeline", "pymice-modules"))
 
 
 def create_notebook(
@@ -91,10 +96,23 @@ excluded_groups = ("{excluded_groups}")
 excluded_animals = ("{excluded_animals}")
 
 # Main routine.
-import glob
-import modules.utils
-modules.utils.import_all("modules", globals())
-data, start, end = modules.utils.load_data(
+import glob as glob
+import glob as glob
+import pymice_analyzer.pymice_modules.utils.import_all
+pymice_analyzer.pymice_modules.utils.import_all.import_all(
+    "pymice_analyzer.pymice_modules.utils", globals()
+)
+pymice_analyzer.pymice_modules.utils.import_all.import_all(
+    "pymice_analyzer.pymice_modules.paradigms", globals()
+)
+pymice_analyzer.pymice_modules.utils.import_all.import_all(
+    "pymice_analyzer.pymice_modules.stats", globals()
+)
+pymice_analyzer.pymice_modules.utils.import_all.import_all(
+    "pymice_analyzer.pymice_modules.display", globals()
+)
+
+data, start, end = pymice_analyzer.pymice_modules.utils.load_data.load_data(
     glob.glob("{rel_data_dir}/*.zip"), 
     start=start,
     end=end,
