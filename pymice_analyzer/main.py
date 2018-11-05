@@ -299,6 +299,7 @@ def parse_args():
 
 
 def main():
+    """Start the main routine."""
     conf = parse_args()
     args = conf[0]
     all_paradigms = conf[1]

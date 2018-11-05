@@ -16,6 +16,8 @@
 #
 #    Emir Turkes can be contacted at eturkes@bu.edu
 
+"""Install package to the Python environment."""
+
 
 import setuptools as st
 
