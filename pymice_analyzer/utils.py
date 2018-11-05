@@ -52,6 +52,14 @@ def create_project_layout(data_dir, proj_path):
         os.path.join(proj_path, "pipeline", "pymice-modules", "pymice_modules"),
         os.path.join(proj_path, "pipeline", "modules"),
     )
+    sl.copy2(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "misc",
+            "update_modules.sh",
+        ),
+        os.path.join(proj_path, "pipeline", "modules"),
+    )
     sl.rmtree(os.path.join(proj_path, "pipeline", "pymice-modules"))
 
 
