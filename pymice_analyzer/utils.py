@@ -80,16 +80,10 @@ def create_notebook(
         cell_0 = f"""\
 # {all_paradigms[paradigm]} - {proj_name}"""
 
-        cell_1 = """\
-# Load modules necessary for the notebook to run.
-import glob
-import modules.utils
-modules.utils.import_all("modules", globals())"""
-
-        cell_2 = """
+        cell_1 = """
 ## Run Paradigm"""
 
-        cell_3 = f"""\
+        cell_2 = f"""\
 # Input arguments.
 start = ("{start}")
 end = ("{end}")
@@ -97,16 +91,19 @@ excluded_groups = ("{excluded_groups}")
 excluded_animals = ("{excluded_animals}")
 
 # Main routine.
+import glob
+import modules.utils
+modules.utils.import_all("modules", globals())
 data, start, end = modules.utils.load_data(
     glob.glob("{rel_data_dir}/*.zip"), 
     start=start,
     end=end,
 )"""
 
-        cell_4 = """\
+        cell_3 = """\
 ## Statistical Testing"""
 
-        cell_5 = f"""\
+        cell_4 = f"""\
 # Input arguments.
 comparisons = ("{comparisons}")
 error = ("{error}")
@@ -117,11 +114,11 @@ post_hoc = ("{post_hoc}")
 
 # Main routine."""
 
-        cell_6 = """\
+        cell_5 = """\
 ## Generate Figures"""
 
-        cell_7 = f"""\
-# Input arguments.
+        cell_6 = f"""\
+# Input arguments.l
 plots = ("{plots}")
 tables = ("{tables}")
 
@@ -129,13 +126,12 @@ tables = ("{tables}")
 
         notebook["cells"] = [
             nbf.v4.new_markdown_cell(cell_0),
-            nbf.v4.new_code_cell(cell_1),
-            nbf.v4.new_markdown_cell(cell_2),
-            nbf.v4.new_code_cell(cell_3),
-            nbf.v4.new_markdown_cell(cell_4),
-            nbf.v4.new_code_cell(cell_5),
-            nbf.v4.new_markdown_cell(cell_6),
-            nbf.v4.new_code_cell(cell_7),
+            nbf.v4.new_markdown_cell(cell_1),
+            nbf.v4.new_code_cell(cell_2),
+            nbf.v4.new_markdown_cell(cell_3),
+            nbf.v4.new_code_cell(cell_4),
+            nbf.v4.new_markdown_cell(cell_5),
+            nbf.v4.new_code_cell(cell_6),
         ]
 
         pipeline_dir = os.path.join(proj_path, "pipeline")
