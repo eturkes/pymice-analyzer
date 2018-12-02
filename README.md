@@ -28,6 +28,8 @@ utilities to encourage proper archivial for reproducibility. Available pipeline 
 are pulled directly from PyMICE Modules and included in the project structure, allowing
 for easy updating and shipping of specific versions with the code.
 
+A part of the PyMICE Tools meta project (https://github.com/eturkes/pymice-tools)
+
 ## Screenshots
 
 ![pymice-analyzer-1](https://user-images.githubusercontent.com/25193231/47751184-7d7ebc00-dc67-11e8-87a8-10644b765930.png)
