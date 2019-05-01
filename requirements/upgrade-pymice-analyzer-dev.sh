@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Emir Turkes can be contacted at eturkes@bu.edu
+#    Emir Turkes can be contacted at emir.turkes@eturkes.com
 
 # This script keeps the pymice-analyzer conda env up-to-date. It first upgrades all
 # conda packages and then all pip packages. To help ensure the most important packages

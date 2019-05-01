@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Emir Turkes can be contacted at eturkes@bu.edu
+#    Emir Turkes can be contacted at emir.turkes@eturkes.com
 
 """Install package to the Python environment."""
 
@@ -27,7 +27,7 @@ st.setup(
     version="0.1.0",
     description="A PyMICE project creator and pipeline manipulator",
     author="Emir Turkes",
-    author_email="eturkes@bu.edu",
+    author_email="emir.turkes@eturkes.com",
     url="https://github.com/eturkes/pymice-analyzer",
     packages=["pymice_analyzer", "pymice_analyzer.misc"],
     package_data={"pymice_analyzer.misc": ["*.sh"]},
