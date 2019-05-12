@@ -19,7 +19,7 @@
 -->
 
 # PyMICE Analyzer
-#### *This project is deployable but not feature complete*
+#### *This project is a work-in-progress*
 
 PyMICE Analyzer is a GUI and CLI project creator and pipeline manipulator. It is
 distinct from full-featured platforms in that it leverages the power and familiarity of
